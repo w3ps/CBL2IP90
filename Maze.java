@@ -5,12 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.*;
 
-
 /**
  * Class for the structure and logic of the maze.
  * 
  * TODO display maze
- * TODO 
+ * TODO
  * 
  */
 public class Maze {
@@ -24,10 +23,9 @@ public class Maze {
 
     private JPanel mazePanel;
     private int bSize = 50; // Size of the borders of the JFrame
-    
+
     private Player player;
-    
-    
+
     /**
      * Constructor for the maze class.
      */
@@ -44,6 +42,7 @@ public class Maze {
         }
 
         tiles = initialize();
+        tileIcons = new TileIcons(tiles);
     }
 
     /**
@@ -65,7 +64,7 @@ public class Maze {
 
     /**
      * Constructs and returns string representation of the grid (without spaces).
-     * Only for testing purposes.
+     * For testing purposes.
      */
     public String printMaze() {
         String mazeString = "";
@@ -84,18 +83,14 @@ public class Maze {
     public JPanel makePanel() {
         mazePanel = new JPanel(new GridLayout(xSize, ySize));
         mazePanel.setBackground(Color.BLACK);
-        // mazePanel.setBorder(BorderFactory.createEmptyBorder(bSize, bSize, bSize, bSize));
+        // mazePanel.setBorder(BorderFactory.createEmptyBorder(bSize, bSize, bSize,
+        // bSize));
 
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
 
-                // JLabel label = new JLabel(String.valueOf(tiles[i][j]));
-                // label.setFont(new Font("Arial", Font.BOLD, 20));
-                
                 // TODO KRIJG ICON UIT TILEICONS.JAVA
-                BufferedImage image = tileIcons.getTileIcon(i, j);
-                mazePanel.add(image);
-                // mazePanel.add(new ScaliedImageP); // TODO SCALE IMAGES
+                mazePanel.add(tileIcons.getTileIcon(i, j));
             }
         }
         return mazePanel;
@@ -112,13 +107,7 @@ public class Maze {
         f.setLocationRelativeTo(null);
 
         f.add(p);
-        
+
         f.setVisible(true);
-    }
-
-    private static class ScaledImagePanel extends JPanel {
-        private BufferedImage image;
-
-        public ScaledImagePanel()
     }
 }

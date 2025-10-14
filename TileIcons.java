@@ -1,6 +1,8 @@
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 /**
  * TODO
@@ -31,7 +33,29 @@ public class TileIcons {
         }
     }
     
-    public BufferedImage getTileIcon(int r, int c) {
-        return images[tiles[r][c]];
+    public JPanel getTileIcon(int r, int c) {
+        return new ScaledImagePanel(images[tiles[r][c]]);
+    }
+
+    // Automatically scales and draws the image
+    private static class ScaledImagePanel extends JPanel {
+        private final BufferedImage image;
+
+        public ScaledImagePanel(BufferedImage image) {
+            this.image = image;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (image != null) {
+                // Get panel dimensions
+                int panelWidth = getWidth();
+                int panelHeight = getHeight();
+
+                // Draw the image scaled to fit the panel
+                g.drawImage(image, 0, 0, panelWidth, panelHeight, this);
+            }
+        }
     }
 }
