@@ -27,7 +27,7 @@ public class TileIcons {
     public void initialize() {
         for (int i = 0; i < images.length; i++) {
             try {
-                images[i] = ImageIO.read(new File("tiles\\tile" + i + ".png"));
+                images[i] = ImageIO.read(new File("tiles\\" + (i + 1) + ".png"));
             } catch (Exception e) {
                 e.printStackTrace();
             }

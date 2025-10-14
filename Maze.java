@@ -92,7 +92,7 @@ public class Maze {
     }
 
     public static void main(String[] args) {
-        Maze m1 = new Maze(4, 4, "0maze.txt");
+        Maze m1 = new Maze(4, 4, "maze_templates/0maze.txt");
         JPanel p = m1.makePanel();
 
         JFrame f = new JFrame();
