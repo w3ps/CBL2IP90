@@ -80,17 +80,12 @@ public class Maze {
      * Turns 'tiles' into a panel with a corresponding gridlayout.
      */
     public JPanel makePanel() {
-        JPanel icon;
         mazePanel = new JPanel(new GridLayout(xSize, ySize));
         mazePanel.setBackground(Color.BLACK);
         mazePanel.setBorder(BorderFactory.createEmptyBorder(bSize, bSize, bSize,
                 bSize));
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
-                icon = tileIcons.getTileIcon(i, j);
-
-                if (icon == null) {
-                }
                 mazePanel.add(tileIcons.getTileIcon(i, j));
             }
         }

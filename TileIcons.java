@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -33,8 +34,17 @@ public class TileIcons {
         }
     }
     
+    /**
+     * Returns the image corresponding to the tile, or null is the tile is 'air'.
+     */
     public JPanel getTileIcon(int r, int c) {
-        return new ScaledImagePanel(images[tiles[r][c]]);
+        int tileValue = tiles[r][c];
+        if (tileValue == 0) {
+            return new ScaledImagePanel(null);
+        } else {
+            return new ScaledImagePanel(images[tileValue]);
+
+        }
     }
 
     // Automatically scales and draws the image
@@ -49,12 +59,10 @@ public class TileIcons {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (image != null) {
-                // Get panel dimensions
-                int panelWidth = getWidth();
-                int panelHeight = getHeight();
-
-                // Draw the image scaled to fit the panel
-                g.drawImage(image, 0, 0, panelWidth, panelHeight, this);
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            } else {
+                g.setColor(Color.BLACK);
+                g.fillRect(0, 0, getWidth(), getHeight());
             }
         }
     }
