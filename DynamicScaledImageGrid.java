@@ -17,7 +17,7 @@ public class DynamicScaledImageGrid extends JFrame {
 
             // Add 16 custom panels that draw the scaled image
             for (int i = 0; i < 16; i++) {
-                gridPanel.add(new ScaledImagePanel(image));
+                gridPanel.add(new SIP(image));
             }
 
             add(gridPanel);
@@ -34,11 +34,11 @@ public class DynamicScaledImageGrid extends JFrame {
         }
     }
 
-    // Custom JPanel that automatically scales and draws the image
-    private static class ScaledImagePanel extends JPanel {
+    // Custom JPanel that automatically draws and scales (TODO) the image
+    private static class SIP extends JPanel {
         private final BufferedImage image;
 
-        public ScaledImagePanel(BufferedImage image) {
+        public SIP(BufferedImage image) {
             this.image = image;
         }
 

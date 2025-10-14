@@ -93,7 +93,7 @@ public class Maze {
                 // label.setFont(new Font("Arial", Font.BOLD, 20));
                 
                 // TODO KRIJG ICON UIT TILEICONS.JAVA
-                BufferedImage image = tilesIcons.getTileIcon(i, j);
+                BufferedImage image = tileIcons.getTileIcon(i, j);
                 mazePanel.add(image);
                 // mazePanel.add(new ScaliedImageP); // TODO SCALE IMAGES
             }
@@ -114,5 +114,11 @@ public class Maze {
         f.add(p);
         
         f.setVisible(true);
+    }
+
+    private static class ScaledImagePanel extends JPanel {
+        private BufferedImage image;
+
+        public ScaledImagePanel()
     }
 }
