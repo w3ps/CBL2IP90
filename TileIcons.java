@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  */
 public class TileIcons {
     private int[][] tiles;
-    private BufferedImage[] images = new BufferedImage[2];
+    private BufferedImage[] images = new BufferedImage[7];
 
     /**
      * Constructor for the 'Tile' class.

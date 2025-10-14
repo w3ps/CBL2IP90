@@ -7,10 +7,8 @@ import javax.swing.*;
 
 /**
  * Class for the structure and logic of the maze.
- * 
- * TODO display maze
+ *
  * TODO
- * 
  */
 public class Maze {
 
@@ -18,11 +16,11 @@ public class Maze {
     private int ySize;
     private Scanner source;
     private File file;
-    private int[][] tiles; // Multidemensional array to display the maze, 0 -> air, 1 -> wall, etc. TODO
-    private TileIcons tileIcons; // TODO FIX DIT FF
+    private int[][] tiles; // Multidemensional array to display maze, 0 -> air, 1 -> wall, etc. TODO
+    private TileIcons tileIcons;
+    private int bSize;
 
     private JPanel mazePanel;
-    private int bSize = 50; // Size of the borders of the JFrame
 
     private Player player;
 
@@ -33,6 +31,7 @@ public class Maze {
         this.xSize = xSize;
         this.ySize = ySize;
         this.file = new File(file);
+        bSize = 20;
 
         try {
             source = new Scanner(this.file);
@@ -81,13 +80,17 @@ public class Maze {
      * Turns 'tiles' into a panel with a corresponding gridlayout.
      */
     public JPanel makePanel() {
+        JPanel icon;
         mazePanel = new JPanel(new GridLayout(xSize, ySize));
         mazePanel.setBackground(Color.BLACK);
-        // mazePanel.setBorder(BorderFactory.createEmptyBorder(bSize, bSize, bSize,
-        // bSize));
-
+        mazePanel.setBorder(BorderFactory.createEmptyBorder(bSize, bSize, bSize,
+                bSize));
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
+                icon = tileIcons.getTileIcon(i, j);
+
+                if (icon == null) {
+                }
                 mazePanel.add(tileIcons.getTileIcon(i, j));
             }
         }
@@ -100,7 +103,7 @@ public class Maze {
 
         JFrame f = new JFrame();
         f.setTitle("Maze Test");
-        f.setSize(300, 300);
+        f.setSize(500, 500);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLocationRelativeTo(null);
 
