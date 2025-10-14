@@ -88,8 +88,6 @@ public class Maze {
 
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
-
-                // TODO KRIJG ICON UIT TILEICONS.JAVA
                 mazePanel.add(tileIcons.getTileIcon(i, j));
             }
         }
