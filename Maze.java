@@ -20,7 +20,7 @@ public class Maze {
     private Scanner source;
     private File file;
     private int[][] tiles; // Multidemensional array to display the maze, 0 -> air, 1 -> wall, etc. TODO
-    private TileIcons; // TODO FIX DIT FF
+    private TileIcons tileIcons; // TODO FIX DIT FF
 
     private JPanel mazePanel;
     private int bSize = 50; // Size of the borders of the JFrame
@@ -93,8 +93,9 @@ public class Maze {
                 // label.setFont(new Font("Arial", Font.BOLD, 20));
                 
                 // TODO KRIJG ICON UIT TILEICONS.JAVA
-                BufferedImage image = getTileIcon(i, j);
-                mazePanel.add(new ScaliedImageP); // TODO SCALE IMAGES
+                BufferedImage image = tilesIcons.getTileIcon(i, j);
+                mazePanel.add(image);
+                // mazePanel.add(new ScaliedImageP); // TODO SCALE IMAGES
             }
         }
         return mazePanel;
