@@ -35,7 +35,7 @@ public class TileIcons {
     }
     
     /**
-     * Returns the image corresponding to the tile, or null is the tile is 'air'.
+     * Returns the image corresponding to the tile, or null if the tile is 'air'.
      */
     public JPanel getTileIcon(int r, int c) {
         int tileValue = tiles[r][c];
@@ -43,7 +43,6 @@ public class TileIcons {
             return new ScaledImagePanel(null);
         } else {
             return new ScaledImagePanel(images[tileValue]);
-
         }
     }
 

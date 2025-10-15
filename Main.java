@@ -14,11 +14,24 @@ public class Main extends JFrame {
     public Main() {
         setTitle("Gravity Shift");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(960, 540);
+        setSize(960, 560);
         setLocationRelativeTo(null);
 
-        add(new Player());
-        add((new Maze(4, 4, "maze_templates\\0maze.txt")).makePanel());
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setSize(960, 560);
+
+        // Maze panel
+        JPanel mazePanel = (new Maze(4, 4, "maze_templates\\0maze.txt")).makePanel(); // TO DO Adjust size as needed
+        mazePanel.setBounds(0, 0, 960, 560);
+        layeredPane.add(mazePanel, Integer.valueOf(0));
+
+        // Player panel
+        Player playerPanel = new Player();
+        playerPanel.setBounds(0, 0, 960, 560);  
+        layeredPane.add(playerPanel, Integer.valueOf(1));
+
+        add(layeredPane);
+
         // TODO Make panels overlap.
 
         setVisible(true);
