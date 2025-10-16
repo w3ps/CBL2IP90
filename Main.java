@@ -19,30 +19,26 @@ public class Main extends JFrame {
         setLocationRelativeTo(null);
 
         JLayeredPane layeredPane = new JLayeredPane();
-        // layeredPane.setSize(getPreferredSize());
+        layeredPane.setSize(getPreferredSize());
 
-        // Maze panel
-        JPanel mazePanel = (new Maze(5, 5, "maze_templates\\0maze.txt")).makePanel(); 
-        // TO DO Adjust size as needed
+        JPanel mazePanel = (new Maze(5, 5, "maze_templates\\0maze.txt")).makePanel();
         mazePanel.setBounds(0, 0, 500, 500);
         layeredPane.add(mazePanel, 0, 0);
 
-        // Player panel
         Player playerPanel = new Player();
         playerPanel.setBounds(0, 0, 500, 500);
-        layeredPane.add(playerPanel, 1, 0);
+        // layeredPane.add(playerPanel, 1, 0);
+
+        // ^^ TODO ff debuggen en dan zorgen dat character op een panel komt
+        // die even groot is als de character zelf, zodat ie makkelijk verplaats kan worden
 
         add(layeredPane);
-
-        // TODO Make panels overlap.
-
         setVisible(true);
     }
 
     public Dimension getFrameSize() {
         return super.getSize();
     }
-
 
     public static void main(String[] args) {
         new Main();

@@ -7,38 +7,30 @@ import javax.swing.*;
 
 /**
  * Class for the movement and logic of the playable in-game character.
- * 
- * TODO
  */
-public class Player extends JPanel implements KeyListener {
+public class Player extends JPanel implements KeyListener, Movement {
     private int x;
     private int y;
     private Image sprite;
-
-    private Maze maze; 
 
     /**
      * Constructor for the player class.
      */
     Player() {
-        this.x = 0;
-        this.y = 0;
-
-        this.maze = new Maze(5, 5, "maze_templates\\0maze.txt");
-
-        setOpaque(false);
-
-        addKeyListener(this);
-        setFocusable(true);
+        x = 0;
+        y = 0;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         sprite = (new ImageIcon(this.getClass().getResource("Sprite.png"))).getImage();
+        sprite = sprite.getScaledInstance(getWidth() / 5, getHeight() / 5, Image.SCALE_DEFAULT);
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(sprite, x, y, getWidth() / 5, getHeight() / 5, this);
+        // g2d.drawImage(sprite, x, y, this);
+
     }
 
     @Override
@@ -47,28 +39,19 @@ public class Player extends JPanel implements KeyListener {
         switch (key) {
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
-                this.x -= 20;
+                moveL();
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                for (int i = (int) this.x / 100; i < 5; i++) {
-                    System.out.println(i);
-                    if (maze.checkCollision(i, (int) this.y / 100)) {
-                        this.x = (i - 1) * 100;
-                        System.out.println(this.x); 
-                        break;
-                    }
-                }
-            
-                this.x += 20;
+                moveL();
                 break;
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                this.y -= 20;
+                moveU();
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
-                this.y += 20;
+                moveD();
                 break;
             default:
                 break;
@@ -77,10 +60,25 @@ public class Player extends JPanel implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
+
+
+    @Override
+    public void moveR() {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void moveL() {
+    }
+
+    @Override
+    public void moveU() {
+    }
+
+    @Override
+    public void moveD() {
     }
 }
