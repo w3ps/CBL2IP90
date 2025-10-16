@@ -1,8 +1,6 @@
+import java.awt.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.*;
@@ -12,12 +10,9 @@ import javax.swing.*;
  * 
  * TODO
  */
-public class Player extends JPanel implements ActionListener, KeyListener {
+public class Player extends JPanel implements KeyListener {
     private int x;
     private int y;
-    private double vel; // Velocity
-    private Timer timer;
-
     private Image sprite;
 
     /**
@@ -26,16 +21,11 @@ public class Player extends JPanel implements ActionListener, KeyListener {
     Player() {
         this.x = 0;
         this.y = 0;
-        this.vel = 0;
 
         setOpaque(false);
 
         addKeyListener(this);
         setFocusable(true);
-        requestFocusInWindow();
-
-        timer = new Timer(7, this);
-        timer.start();
     }
 
     @Override
@@ -44,35 +34,40 @@ public class Player extends JPanel implements ActionListener, KeyListener {
         sprite = (new ImageIcon(this.getClass().getResource("Sprite.png"))).getImage();
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(sprite, x, y, getWidth() / 4, getHeight() / 4, this);
+        g2d.drawImage(sprite, x, y, getWidth() / 5, getHeight() / 5, this);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent l) {
-        int key = l.getKeyCode();
-        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-            if (x > 0) {
-                x -= 960 / 4;
-            }
-        } else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-            if (x < getWidth() - sprite.getWidth(this)) {
-                x += 960 / 4;
-            }
-        } else if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-            if (y > 0) {
-                y -= 560 / 4;
-            }
-        } else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-            if (y < getHeight() - sprite.getHeight(this)) {
-                y += 560 / 4;
-            }
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        switch (key) {
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
+                x -= 20;
+                break;
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
+                x += 20;
+                break;
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
+                y -= 20;
+                break;
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
+                y += 20;
+                break;
+            default:
+                break;
         }
         repaint();
+    }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }

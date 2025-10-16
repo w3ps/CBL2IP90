@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import javax.swing.*;
 
 /**
@@ -14,21 +15,22 @@ public class Main extends JFrame {
     public Main() {
         setTitle("Gravity Shift");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(960, 560);
+        setSize(500, 500);
         setLocationRelativeTo(null);
 
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setSize(960, 560);
+        // layeredPane.setSize(getPreferredSize());
 
         // Maze panel
-        JPanel mazePanel = (new Maze(4, 4, "maze_templates\\0maze.txt")).makePanel(); // TO DO Adjust size as needed
-        mazePanel.setBounds(0, 0, 960, 560);
-        layeredPane.add(mazePanel, Integer.valueOf(0));
+        JPanel mazePanel = (new Maze(5, 5, "maze_templates\\0maze.txt")).makePanel(); 
+        // TO DO Adjust size as needed
+        mazePanel.setBounds(0, 0, 500, 500);
+        layeredPane.add(mazePanel, 0, 0);
 
         // Player panel
         Player playerPanel = new Player();
-        playerPanel.setBounds(0, 0, 960, 560);  
-        layeredPane.add(playerPanel, Integer.valueOf(1));
+        playerPanel.setBounds(0, 0, 500, 500);
+        layeredPane.add(playerPanel, 1, 0);
 
         add(layeredPane);
 
@@ -36,6 +38,11 @@ public class Main extends JFrame {
 
         setVisible(true);
     }
+
+    public Dimension getFrameSize() {
+        return super.getSize();
+    }
+
 
     public static void main(String[] args) {
         new Main();

@@ -17,7 +17,6 @@ public class Maze {
     private File file;
     private int[][] tiles; // Multidemensional array to display maze, 0 -> air, 1 -> wall, etc. TODO
     private TileIcons tileIcons;
-    private int bSize;
 
     private JPanel mazePanel;
 
@@ -30,7 +29,6 @@ public class Maze {
         this.xSize = xSize;
         this.ySize = ySize;
         this.file = new File(file);
-        bSize = 20;
 
         try {
             source = new Scanner(this.file);
@@ -81,8 +79,6 @@ public class Maze {
     public JPanel makePanel() {
         mazePanel = new JPanel(new GridLayout(xSize, ySize));
         mazePanel.setBackground(Color.BLACK);
-        mazePanel.setBorder(BorderFactory.createEmptyBorder(bSize, bSize, bSize,
-                bSize));
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
                 mazePanel.add(tileIcons.getTileIcon(i, j));
@@ -92,12 +88,12 @@ public class Maze {
     }
 
     public static void main(String[] args) {
-        Maze m1 = new Maze(4, 4, "maze_templates/0maze.txt");
+        Maze m1 = new Maze(5, 5, "maze_templates/0maze.txt");
         JPanel p = m1.makePanel();
 
         JFrame f = new JFrame();
         f.setTitle("Maze Test");
-        f.setSize(500, 500);
+        f.setSize(750, 750);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLocationRelativeTo(null);
 
