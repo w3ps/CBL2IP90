@@ -15,12 +15,16 @@ public class Player extends JPanel implements KeyListener {
     private int y;
     private Image sprite;
 
+    private Maze maze; 
+
     /**
      * Constructor for the player class.
      */
     Player() {
         this.x = 0;
         this.y = 0;
+
+        this.maze = new Maze(5, 5, "maze_templates\\0maze.txt");
 
         setOpaque(false);
 
@@ -43,19 +47,28 @@ public class Player extends JPanel implements KeyListener {
         switch (key) {
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
-                x -= 20;
+                this.x -= 20;
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                x += 20;
+                for (int i = (int) this.x / 100; i < 5; i++) {
+                    System.out.println(i);
+                    if (maze.checkCollision(i, (int) this.y / 100)) {
+                        this.x = (i - 1) * 100;
+                        System.out.println(this.x); 
+                        break;
+                    }
+                }
+            
+                this.x += 20;
                 break;
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                y -= 20;
+                this.y -= 20;
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
-                y += 20;
+                this.y += 20;
                 break;
             default:
                 break;

@@ -87,6 +87,18 @@ public class Maze {
         return mazePanel;
     }
 
+    /**
+     * Checks if the given coordinates collide with a wall tile.
+     */
+    public boolean checkCollision(int x, int y) {
+        System.out.println(tiles[x][y]);
+        if (tiles[x][y] > 0) {
+            System.out.println("true");
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Maze m1 = new Maze(5, 5, "maze_templates/0maze.txt");
         JPanel p = m1.makePanel();
