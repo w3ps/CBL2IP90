@@ -8,6 +8,8 @@ import javax.swing.*;
  * @author Juul Versteijnen - 2312298
  */
 public class Main extends JFrame {
+    private static final int TILE_SIZE = 5;
+    private static final int SIZE = TILE_SIZE * 128;
 
     /**
      * Constructor for the main class (mainly the JFrame).
@@ -15,25 +17,26 @@ public class Main extends JFrame {
     public Main() {
         setTitle("Gravity Shift");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 500);
+        setSize(SIZE, SIZE);
         setLocationRelativeTo(null);
 
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setSize(getPreferredSize());
+        layeredPane.setPreferredSize(new Dimension(SIZE, SIZE));
 
-        JPanel mazePanel = (new Maze(5, 5, "maze_templates\\0maze.txt")).makePanel();
-        mazePanel.setBounds(0, 0, 500, 500);
-        layeredPane.add(mazePanel, 0, 0);
+        JPanel mazePanel = (new Maze(TILE_SIZE, TILE_SIZE,
+            "maze_templates\\0maze.txt")).makePanel();
+        mazePanel.setBounds(0, 0, SIZE, SIZE);
+        layeredPane.add(mazePanel, Integer.valueOf(0));
 
-        Player playerPanel = new Player();
-        playerPanel.setBounds(0, 0, 500, 500);
-        // layeredPane.add(playerPanel, 1, 0);
-
-        // ^^ TODO ff debuggen en dan zorgen dat character op een panel komt
-        // die even groot is als de character zelf, zodat ie makkelijk verplaats kan worden
+        Player playerPanel = new Player(SIZE);
+        playerPanel.setFocusable(true);
+        playerPanel.setBounds(0, 0, 128, 128);
+        layeredPane.add(playerPanel, Integer.valueOf(1));
 
         add(layeredPane);
+        pack();
         setVisible(true);
+        playerPanel.requestFocusInWindow();
     }
 
     public Dimension getFrameSize() {

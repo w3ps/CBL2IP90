@@ -15,11 +15,10 @@ public class Maze {
     private int ySize;
     private Scanner source;
     private File file;
-    private int[][] tiles; // Multidemensional array to display maze, 0 -> air, 1 -> wall, etc. TODO
+    private int[][] tiles; // Multidemensional array to display maze
     private TileIcons tileIcons;
 
     private JPanel mazePanel;
-
     private Player player;
 
     /**
