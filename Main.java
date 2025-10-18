@@ -1,4 +1,3 @@
-import java.awt.Dimension;
 import javax.swing.*;
 
 /**
@@ -20,27 +19,11 @@ public class Main extends JFrame {
         setSize(SIZE, SIZE);
         setLocationRelativeTo(null);
 
-        JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(SIZE, SIZE));
-
-        JPanel mazePanel = (new Maze(TILE_SIZE, TILE_SIZE,
-            "maze_templates\\0maze.txt")).makePanel();
-        mazePanel.setBounds(0, 0, SIZE, SIZE);
-        layeredPane.add(mazePanel, Integer.valueOf(0));
-
-        Player playerPanel = new Player(SIZE);
-        playerPanel.setFocusable(true);
-        playerPanel.setBounds(0, 0, 128, 128);
-        layeredPane.add(playerPanel, Integer.valueOf(1));
-
-        add(layeredPane);
+        JLayeredPane gp = new GamePanel(TILE_SIZE);
+        add(gp);
+        
         pack();
         setVisible(true);
-        playerPanel.requestFocusInWindow();
-    }
-
-    public Dimension getFrameSize() {
-        return super.getSize();
     }
 
     public static void main(String[] args) {

@@ -9,27 +9,35 @@ import javax.swing.*;
  * Class for the movement and logic of the playable in-game character.
  */
 public class Player extends JPanel implements KeyListener, Movement {
-    private int size;
+    private int step;
+    private int x;
+    private int y;
     private Image sprite;
+    private Maze maze;
 
     /**
      * Constructor for the player class.
      */
-    Player(int SIZE) {
-        this.size = SIZE;
+    Player(int size, int tileSize) {
+        step = size / tileSize;
+        x = 0;
+        y = 0;
+
         addKeyListener(this);
         setOpaque(false);
+    }
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        sprite = (new ImageIcon(this.getClass().getResource("Sprite.png"))).getImage();
-        // sprite = sprite.getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);
+        sprite = (new ImageIcon(this.getClass().getResource("textures\\Sprite.png"))).getImage();
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(sprite, 0, 0, this);
-        // g2d.drawImage(sprite, x, y, this);
     }
 
     @Override
@@ -58,35 +66,46 @@ public class Player extends JPanel implements KeyListener, Movement {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+    }
 
     @Override
     public void moveR() {
-        
-        
-        setLocation(getX() + size / 5, getY());
+        while (!maze.checkCollision(x + step, y)) {
+            x += step;
+        }
+        setLocation(x, y);
         repaint();
-        // System.out.println(this.getX() + ", " + getY());
     }
 
     @Override
     public void moveL() {
-        setLocation(getX() - size / 5, getY());
+        while (!maze.checkCollision(x - step, y)) {
+            x -= step;
+        }
+        setLocation(x, y);
         repaint();
     }
 
     @Override
     public void moveU() {
-        setLocation(getX(), getY() - size / 5);
+        while (!maze.checkCollision(x, y - step)) {
+            y -= step;
+        }
+        setLocation(x, y);
         repaint();
     }
 
     @Override
     public void moveD() {
-        setLocation(getX(), getY() + size / 5);
+        while (!maze.checkCollision(x, y + step)) {
+            y += step;
+        }
+        setLocation(x, y);
         repaint();
     }
 }

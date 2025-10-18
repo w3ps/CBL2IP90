@@ -6,18 +6,19 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * TODO
- * TODO.
+ * Implementation for the tile icons used in the maze grid.
  */
 public class TileIcons {
     private int[][] tiles;
-    private BufferedImage[] images = new BufferedImage[7];
+    private BufferedImage[] images;
+    private static final int PIC_AMOUNT = 8;
 
     /**
      * Constructor for the 'Tile' class.
      */
     public TileIcons(int [][] tiles) {
         this.tiles = tiles;
+        images = new BufferedImage[PIC_AMOUNT];
         initialize();
     }
 
@@ -27,7 +28,7 @@ public class TileIcons {
     public void initialize() {
         for (int i = 0; i < images.length; i++) {
             try {
-                images[i] = ImageIO.read(new File("tiles\\" + (i + 1) + ".png"));
+                images[i] = ImageIO.read(new File("textures\\tiles\\" + (i + 1) + ".png"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
