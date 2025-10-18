@@ -1,10 +1,6 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 /**
  * Implementation for the event in which the goal is reached.
@@ -27,16 +23,24 @@ public class Goal extends JPanel {
         textPanel.add(goalLabel);
 
         btnPanel = new JPanel(new GridLayout(1, 2));
-        mmButton = new JButton();
-        mmButton.setText("Main Menu");
-        nxtButton = new JButton();
-        nxtButton.setText("Next Level");
+        mmButton = new JButton("Main Menu");
+        mmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openMainMenu();
+            }
+        });
+        nxtButton = new JButton("Next Level");
 
         btnPanel.add(mmButton, BorderLayout.WEST);
         btnPanel.add(nxtButton, BorderLayout.EAST);
 
         add(textPanel, BorderLayout.NORTH);
         add(btnPanel, BorderLayout.SOUTH);
+    }
+
+    private void openMainMenu() {
+        new Menu();
     }
 
     public static void main(String[] args) {
