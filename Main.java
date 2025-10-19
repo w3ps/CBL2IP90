@@ -7,7 +7,7 @@ import javax.swing.*;
  * @author Juul Versteijnen - 2312298
  */
 public class Main extends JFrame {
-    private static final int TILE_SIZE = 5;
+    private static final int TILE_SIZE = 10;
     private static final int SIZE = TILE_SIZE * 128;
 
     /**
@@ -18,15 +18,21 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(SIZE, SIZE);
         setLocationRelativeTo(null);
+        new Controller(this);
+    }
 
-        JLayeredPane gp = new GamePanel(TILE_SIZE);
-        add(gp);
-        
+    public int getTileSize() {
+        return TILE_SIZE;
+    }
+
+    public void update() {
         pack();
-        setVisible(true);
     }
 
     public static void main(String[] args) {
-        new Main();
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            Main m = new Main();
+            m.setVisible(true);
+        });
     }
 }

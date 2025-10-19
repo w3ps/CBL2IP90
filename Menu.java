@@ -1,83 +1,77 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 /**
  * Class for the main menu of the game.
  */
-public class Menu extends JFrame {
-    JPanel menuPanel;
-
-    JButton startButton;
-    JButton optionsButton;
-    JButton exitButton;
-
-    Dimension buttonSize = new Dimension(180, 60);
+public class Menu extends JPanel {
+    private int tileSize;
+    private JButton startBtn;
+    private JButton optionsBtn;
+    private JButton exitBtn;
+    private Controller controller;
+    private static final Dimension BTN_SIZE = new Dimension(180, 60);
 
     /**
      * Constructor for the menu class.
      */
-    public Menu() {
-        setTitle("Gravity Shift - Menu");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+    public Menu(Controller controller) {
+        setPreferredSize(new Dimension(640, 640));
 
-        menuPanel = new JPanel();
-        menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
-        menuPanel.setBorder(BorderFactory.createEmptyBorder(30, 100, 30, 100)); // top, left, bottom, right
+        this.controller = controller;
+        tileSize = controller.getTileSize();
+        startBtn = new JButton("Start Game");
+        optionsBtn = new JButton("Options");
+        exitBtn = new JButton("Exit");
 
-        startButton = new JButton("Start Game");
-        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        startButton.setMaximumSize(buttonSize);
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startGame();
-            }
-        });
-
-        optionsButton = new JButton("Options");
-        optionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        optionsButton.setMaximumSize(buttonSize);
-
-        exitButton = new JButton("Exit");
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        exitButton.setMaximumSize(buttonSize);
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exitGame();
-            }
-        });
-
-        menuPanel.add(Box.createRigidArea(new Dimension(0, 50)));
-        menuPanel.add(startButton);
-        menuPanel.add(Box.createRigidArea(new Dimension(0, 30)));
-        menuPanel.add(optionsButton);
-        menuPanel.add(Box.createRigidArea(new Dimension(0, 30)));
-        menuPanel.add(exitButton);
-
-        add(menuPanel);
-
-        setVisible(true);
+        initialize();
     }
 
-    private void startGame() {
-        // Logic to start the game
-        new Main();
+    /**
+     * Initializes the Menu panel.
+     */
+    public void initialize() {
+        setBackground(Color.DARK_GRAY);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(BorderFactory.createEmptyBorder(
+                30, 100, 30, 100));
+
+        startBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        startBtn.setMaximumSize(BTN_SIZE);
+        startBtn.addActionListener(e -> startBtnPressed());
+
+        optionsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsBtn.setMaximumSize(BTN_SIZE);
+        optionsBtn.addActionListener(e -> optionsBtnPressed());
+
+        exitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exitBtn.setMaximumSize(BTN_SIZE);
+        exitBtn.addActionListener(e -> exitBtnPressed());
+
+        add(Box.createRigidArea(new Dimension(0, 30)));
+        add(startBtn);
+        add(Box.createRigidArea(new Dimension(0, 30)));
+        add(optionsBtn);
+        add(Box.createRigidArea(new Dimension(0, 30)));
+        add(exitBtn);
     }
 
-    private void openOptions() {
-        // Logic to open options menu
+    /**
+     * Launches the game and hides the main menu.
+     */
+    public void startBtnPressed() { // TODO
+        controller.addLPane(new GamePanel(tileSize));
+        setVisible(false);
     }
 
-    private void exitGame() {
+    /**
+     * Opens the options menu and hides the main menu.
+     */
+    public void optionsBtnPressed() { // TODO
+        setVisible(false);
+    }
+
+    public void exitBtnPressed() {
         System.exit(0);
     }
-
-    public static void main(String[] args) {
-        new Menu();
-
-    }
-
 }

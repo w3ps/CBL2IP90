@@ -16,8 +16,8 @@ public class GamePanel extends JLayeredPane {
      * Constructor for the GamePanel class.
      */
     public GamePanel(int tileSize) {
-        size = tileSize * 128;
         this.tileSize = tileSize;
+        size = tileSize * 128;
 
         maze = new Maze(this.tileSize, this.tileSize, "maze_templates\\0maze.txt");
         maze.setGamePanel(this);

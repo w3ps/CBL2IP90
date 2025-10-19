@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -9,8 +8,8 @@ public class Goal extends JPanel {
     private JPanel textPanel;
     private JLabel goalLabel; // Congratulations text
     private JPanel btnPanel; // Panel for buttons
-    private JButton mmButton; // Main Menu button
-    private JButton nxtButton; // Next Level button
+    private JButton mmBtn; // Main Menu button
+    private JButton nxtBtn; // Next Level button
 
     /**
      * Constructor for the Goal class.
@@ -20,27 +19,34 @@ public class Goal extends JPanel {
 
         textPanel = new JPanel();
         goalLabel = new JLabel("You won, good job!");
-        textPanel.add(goalLabel);
-
         btnPanel = new JPanel(new GridLayout(1, 2));
-        mmButton = new JButton("Main Menu");
-        mmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openMainMenu();
-            }
-        });
-        nxtButton = new JButton("Next Level");
+        mmBtn = new JButton("Main Menu");
+        nxtBtn = new JButton("Next Level");
+        
+        initialize();
+    }
 
-        btnPanel.add(mmButton, BorderLayout.WEST);
-        btnPanel.add(nxtButton, BorderLayout.EAST);
+    /**
+     * Initializes the Goal menu.
+     */
+    public void initialize() {
+        textPanel.add(goalLabel);
+        mmBtn.addActionListener(e -> mmButtonPressed());
+        nxtBtn.addActionListener(e -> nxtButtonPressed());
+        
+        btnPanel.add(mmBtn, BorderLayout.WEST);
+        btnPanel.add(nxtBtn, BorderLayout.EAST);
 
         add(textPanel, BorderLayout.NORTH);
         add(btnPanel, BorderLayout.SOUTH);
     }
 
-    private void openMainMenu() {
+    public void mmButtonPressed() {
         new Menu();
+    }
+
+    public void nxtButtonPressed() {
+        // TODO
     }
 
     public static void main(String[] args) {
