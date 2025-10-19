@@ -10,6 +10,8 @@ public class Goal extends JPanel {
     private JPanel btnPanel; // Panel for buttons
     private JButton mmBtn; // Main Menu button
     private JButton nxtBtn; // Next Level button
+    private GamePanel gp;
+    private Controller controller;
 
     /**
      * Constructor for the Goal class.
@@ -22,7 +24,7 @@ public class Goal extends JPanel {
         btnPanel = new JPanel(new GridLayout(1, 2));
         mmBtn = new JButton("Main Menu");
         nxtBtn = new JButton("Next Level");
-        
+
         initialize();
     }
 
@@ -33,7 +35,7 @@ public class Goal extends JPanel {
         textPanel.add(goalLabel);
         mmBtn.addActionListener(e -> mmButtonPressed());
         nxtBtn.addActionListener(e -> nxtButtonPressed());
-        
+
         btnPanel.add(mmBtn, BorderLayout.WEST);
         btnPanel.add(nxtBtn, BorderLayout.EAST);
 
@@ -41,21 +43,20 @@ public class Goal extends JPanel {
         add(btnPanel, BorderLayout.SOUTH);
     }
 
+    public void setGamePanel(GamePanel gp) {
+        this.gp = gp;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
     public void mmButtonPressed() {
-        new Menu();
+        controller.showMenu();
+        controller.removeLPane(gp);;
     }
 
     public void nxtButtonPressed() {
         // TODO
-    }
-
-    public static void main(String[] args) {
-        JFrame f = new JFrame("GoalDemo");
-        f.setSize(640, 640);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocationRelativeTo(null);
-        f.add(new Goal(640));
-        f.pack();
-        f.setVisible(true);
     }
 }

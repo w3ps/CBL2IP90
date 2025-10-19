@@ -6,11 +6,12 @@ import javax.swing.JPanel;
  * Handles the JPanels related to the game itself, to maintain smooth flow.
  */
 public class GamePanel extends JLayeredPane {
+    private int size;
+    private int tileSize;
     private Maze maze;
     private JPanel mazePanel;
     private Player p;
-    private int size;
-    private int tileSize;
+    private Controller controller;
 
     /**
      * Constructor for the GamePanel class.
@@ -43,15 +44,20 @@ public class GamePanel extends JLayeredPane {
         setPreferredSize(new Dimension(size, size));
     }
 
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
     /**
      * Logic for GamePanel, whenever the goal is reached.
      */
     public void goalEvent() {
         remove(p);
         remove(mazePanel);
-
-        Goal goalPanel = new Goal(size);
-        goalPanel.setBounds(0, 0, size, size);
-        add(goalPanel);
+        
+        Goal goal = new Goal(size);
+        goal.setBounds(0, 0, size, size);
+        goal.setController(controller);
+        add(goal);
     }
 }

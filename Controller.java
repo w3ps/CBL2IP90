@@ -5,8 +5,10 @@ import javax.swing.JPanel;
  * Controls the main GUI.
  */
 public class Controller {
-    private Main main;
     private int tileSize;
+    private Main main;
+    private Menu menu;
+    
 
     /**
      * Creates and implements the control class.
@@ -14,11 +16,12 @@ public class Controller {
     public Controller(Main main) {
         this.main = main;
         tileSize = main.getTileSize();
+        menu = new Menu(this);
         run();
     }
 
     public void run() {
-        addPanel(new Menu(this));
+        addPanel(menu);
     }
 
     /**
@@ -53,12 +56,12 @@ public class Controller {
         main.update();
     }
 
-    public void hide() {
-        main.setVisible(false);
+    public void hidePanel(JPanel p) {
+        p.setVisible(false);
     }
 
-    public void show() {
-        main.setVisible(true);
+    public void showMenu() {
+        menu.setVisible(true);
     }
 
     public int getTileSize() {

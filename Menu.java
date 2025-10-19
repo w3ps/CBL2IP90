@@ -60,7 +60,9 @@ public class Menu extends JPanel {
      * Launches the game and hides the main menu.
      */
     public void startBtnPressed() { // TODO
-        controller.addLPane(new GamePanel(tileSize));
+        GamePanel gp = new GamePanel(tileSize);
+        gp.setController(controller);
+        controller.addLPane(gp);
         setVisible(false);
     }
 
