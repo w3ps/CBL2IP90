@@ -7,9 +7,10 @@ import javax.swing.*;
 public class Menu extends JPanel {
     private int tileSize;
     private JButton startBtn;
-    private JButton optionsBtn;
+    private JButton settingsBtn;
     private JButton exitBtn;
     private Controller controller;
+    private Settings settings;
     private static final Dimension BTN_SIZE = new Dimension(180, 60);
 
     /**
@@ -20,8 +21,11 @@ public class Menu extends JPanel {
 
         this.controller = controller;
         tileSize = controller.getTileSize();
+        settings = controller.getSettings();
+        settings.setMenu(this);
+
         startBtn = new JButton("Start Game");
-        optionsBtn = new JButton("Options");
+        settingsBtn = new JButton("Options");
         exitBtn = new JButton("Exit");
 
         initialize();
@@ -31,7 +35,7 @@ public class Menu extends JPanel {
      * Initializes the Menu panel.
      */
     public void initialize() {
-        setBackground(Color.DARK_GRAY);
+        // setBackground(Color.DARK_GRAY);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(
                 30, 100, 30, 100));
@@ -40,9 +44,9 @@ public class Menu extends JPanel {
         startBtn.setMaximumSize(BTN_SIZE);
         startBtn.addActionListener(e -> startBtnPressed());
 
-        optionsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        optionsBtn.setMaximumSize(BTN_SIZE);
-        optionsBtn.addActionListener(e -> optionsBtnPressed());
+        settingsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        settingsBtn.setMaximumSize(BTN_SIZE);
+        settingsBtn.addActionListener(e -> optionsBtnPressed());
 
         exitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         exitBtn.setMaximumSize(BTN_SIZE);
@@ -51,7 +55,7 @@ public class Menu extends JPanel {
         add(Box.createRigidArea(new Dimension(0, 30)));
         add(startBtn);
         add(Box.createRigidArea(new Dimension(0, 30)));
-        add(optionsBtn);
+        add(settingsBtn);
         add(Box.createRigidArea(new Dimension(0, 30)));
         add(exitBtn);
     }
@@ -63,14 +67,15 @@ public class Menu extends JPanel {
         GamePanel gp = new GamePanel(tileSize);
         gp.setController(controller);
         controller.addLPane(gp);
-        setVisible(false);
+        controller.hidePanel(this);
     }
 
     /**
      * Opens the options menu and hides the main menu.
      */
     public void optionsBtnPressed() { // TODO
-        setVisible(false);
+        controller.removePanel(this);
+        controller.addPanel(settings);
     }
 
     public void exitBtnPressed() {

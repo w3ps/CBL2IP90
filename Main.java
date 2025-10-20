@@ -7,8 +7,8 @@ import javax.swing.*;
  * @author Juul Versteijnen - 2312298
  */
 public class Main extends JFrame {
-    private static final int TILE_SIZE = 10;
-    private static final int SIZE = TILE_SIZE * 128;
+    private static final int TILE_SIZE = 10; // Size of the maze, expressed in tiles.
+    private static final int SIZE = TILE_SIZE * 128; // Size, expressed in pixels.
 
     /**
      * Constructor for the main class (mainly the JFrame).
@@ -25,8 +25,17 @@ public class Main extends JFrame {
         return TILE_SIZE;
     }
 
+    /**
+     * Updates the frame. Restores the frame to its original size if eiter of its
+     * dimensions is 0.
+     */
     public void update() {
-        pack();
+        getContentPane().revalidate();
+        getContentPane().repaint();
+
+        if (getWidth() == 0 || getHeight() == 0) {
+            setSize(SIZE, SIZE);
+        }
     }
 
     public static void main(String[] args) {

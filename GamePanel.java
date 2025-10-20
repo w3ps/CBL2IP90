@@ -57,6 +57,7 @@ public class GamePanel extends JLayeredPane {
         
         Goal goal = new Goal(size);
         goal.setBounds(0, 0, size, size);
+        goal.setGamePanel(this);
         goal.setController(controller);
         add(goal);
     }

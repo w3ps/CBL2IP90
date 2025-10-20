@@ -8,7 +8,7 @@ public class Controller {
     private int tileSize;
     private Main main;
     private Menu menu;
-    
+    private Settings settings;
 
     /**
      * Creates and implements the control class.
@@ -16,11 +16,8 @@ public class Controller {
     public Controller(Main main) {
         this.main = main;
         tileSize = main.getTileSize();
+        settings = new Settings(this);
         menu = new Menu(this);
-        run();
-    }
-
-    public void run() {
         addPanel(menu);
     }
 
@@ -56,15 +53,27 @@ public class Controller {
         main.update();
     }
 
+    /**
+     * Hides the given panel p from the frame.
+     */
     public void hidePanel(JPanel p) {
         p.setVisible(false);
+        main.update();
     }
 
+    /**
+     * Shows the main menu and updates the frame.
+     */
     public void showMenu() {
         menu.setVisible(true);
+        main.update();
     }
 
     public int getTileSize() {
         return tileSize;
+    }
+
+    public Settings getSettings() {
+        return settings;
     }
 }
