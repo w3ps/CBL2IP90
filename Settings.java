@@ -91,17 +91,7 @@ public class Settings extends JPanel {
         this.level = level;
     }
 
-    // public static void main(String[] args) {
-    //     SwingUtilities.invokeLater(() -> {
-    //         JFrame frame = new JFrame("Settings Panel");
-    //         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    //         Settings panel = new Settings();
-    //         frame.getContentPane().add(panel);
-
-    //         frame.pack();
-    //         frame.setLocationRelativeTo(null);
-    //         frame.setVisible(true);
-    //     });
-    // }
+    public int getVolume() {
+        return volume;
+    }
 }

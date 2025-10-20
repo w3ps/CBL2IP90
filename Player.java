@@ -60,20 +60,23 @@ public class Player extends JPanel implements KeyListener, Movement {
             case KeyEvent.VK_S:
                 moveD();
                 break;
+            case KeyEvent.VK_R:
+                restart();
+                break;
             default:
                 break;
         }
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
-    }
+    public void keyReleased(KeyEvent e) {}
 
-    @Override
+    /**
+     * Moves the player right to the next wall.
+     */
     public void moveR() {
         while (!maze.checkCollision(x + step, y)) {
             x += step;
@@ -82,7 +85,9 @@ public class Player extends JPanel implements KeyListener, Movement {
         repaint();
     }
 
-    @Override
+    /**
+     * Moves the player left to the next wall.
+     */
     public void moveL() {
         while (!maze.checkCollision(x - step, y)) {
             x -= step;
@@ -91,7 +96,9 @@ public class Player extends JPanel implements KeyListener, Movement {
         repaint();
     }
 
-    @Override
+    /**
+     * Moves the player up to the next wall.
+     */
     public void moveU() {
         while (!maze.checkCollision(x, y - step)) {
             y -= step;
@@ -100,11 +107,23 @@ public class Player extends JPanel implements KeyListener, Movement {
         repaint();
     }
 
-    @Override
+    /**
+     * Moves the player down to the next wall.
+     */
     public void moveD() {
         while (!maze.checkCollision(x, y + step)) {
             y += step;
         }
+        setLocation(x, y);
+        repaint();
+    }
+
+    /**
+     * Moves the player back to the start.
+     */
+    public void restart() {
+        x = 0;
+        y = 0;
         setLocation(x, y);
         repaint();
     }

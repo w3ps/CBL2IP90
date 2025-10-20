@@ -30,10 +30,9 @@ public class Main extends JFrame {
      * dimensions is 0.
      */
     public void update() {
-        getContentPane().revalidate();
-        getContentPane().repaint();
+        pack();
 
-        if (getWidth() == 0 || getHeight() == 0) {
+        if (getWidth() == 136 || getHeight() == 39) { // Returns to original size if frame is folded
             setSize(SIZE, SIZE);
         }
     }
