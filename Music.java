@@ -13,14 +13,12 @@ public class Music {
     private File musicFile;
     private int volume;
     private Clip clip;
-    private Settings settings;
 
     /**
      * Constructor for the Music class.
      */
-    public Music(Settings settings) {
-        this.settings = settings;
-        volume = this.settings.getVolume();
+    public Music(int volume) {
+        this.volume = volume;
         musicFile = new File(LOCATION);
 
         play();
@@ -51,9 +49,5 @@ public class Music {
         float range = gainControl.getMaximum() - gainControl.getMinimum();
         float gain = (range * volume / 100f) + gainControl.getMinimum();
         gainControl.setValue(gain);
-    }
-
-    public static void main(String[] args) {
-        new Music(new Settings(new Controller(new Main())));
     }
 }

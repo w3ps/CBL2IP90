@@ -5,12 +5,9 @@ import javax.swing.*;
  * Stores the settings and handles the settings panel.
  */
 public class Settings extends JPanel {
-    private int level;
     private int volume;
-
-    private JSpinner levelSpinner;
     private JSlider volumeSlider;
-    private JButton backButton;
+    private JButton bckBtn;
     private Controller controller;
     private Menu menu;
     private Storage storage;
@@ -19,16 +16,13 @@ public class Settings extends JPanel {
     /**
      * Constructor for the Settings class.
      */
-    public Settings(Controller controller) {
-        level = 1;
-        volume = 50;
+    public Settings(Controller controller, Storage storage) {
         this.controller = controller;
-        music = new Music(this);
-
-        initialize();
+    
+        initializeUI();
     }
 
-    private void initialize() {
+    private void initializeUI() {
         setPreferredSize(new Dimension(640, 640));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -44,16 +38,6 @@ public class Settings extends JPanel {
 
         gbc.gridwidth = 1;
 
-        JLabel levelLabel = new JLabel("Level:");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(levelLabel, gbc);
-
-        levelSpinner = new JSpinner(new SpinnerNumberModel(level, 1, 10, 1));
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        add(levelSpinner, gbc);
-
         JLabel volumeLabel = new JLabel("Volume:");
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -67,24 +51,25 @@ public class Settings extends JPanel {
         gbc.gridy = 2;
         add(volumeSlider, gbc);
 
-        backButton = new JButton("Back");
+        bckBtn = new JButton("Back");
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
-        add(backButton, gbc);
+        add(bckBtn, gbc);
 
-        levelSpinner.addChangeListener(e -> setLevel((int) levelSpinner.getValue()));
         volumeSlider.addChangeListener(e -> updateVolume());
-        backButton.addActionListener(e -> backButtonPressed());
+        bckBtn.addActionListener(e -> bckBtnPressed());
     }
 
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
 
-    /**
-     * Updates the volume for both settings and music.
-     */
+    public Menu getMenu() {
+        return menu;
+    }
+    
+    /** Updates the volume for both settings and music. */
     public void updateVolume() {
         volume = volumeSlider.getValue();
         music.setVolume(volume);
@@ -93,17 +78,12 @@ public class Settings extends JPanel {
     /**
      * Removes settings panel and goes back to main menu.
      */
-    public void backButtonPressed() {
+    public void bckBtnPressed() {
         controller.removePanel(this);
         controller.addPanel(menu);
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getVolume() {
-        volume = 70;
-        return volume;
+    public Controller getController() {
+        return controller;
     }
 }

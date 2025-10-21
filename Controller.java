@@ -8,7 +8,9 @@ public class Controller {
     private int tileSize;
     private Main main;
     private Menu menu;
+    private Music music;
     private Settings settings;
+    private Storage storage;
 
     /**
      * Creates and implements the control class.
@@ -16,7 +18,8 @@ public class Controller {
     public Controller(Main main) {
         this.main = main;
         tileSize = main.getTileSize();
-        settings = new Settings(this);
+        storage = new Storage();
+        music = new Music(storage.getVolume());
         menu = new Menu(this);
         addPanel(menu);
     }
@@ -56,7 +59,7 @@ public class Controller {
     /**
      * Hides the given panel p from the frame.
      */
-    public void hidePanel(JPanel p) {
+    public void hidePanel(JPanel p) { // TODO kan denk k weg
         p.setVisible(false);
         main.update();
     }
@@ -64,7 +67,7 @@ public class Controller {
     /**
      * Shows the main menu and updates the frame.
      */
-    public void showMenu() {
+    public void showMenu() { // TODO kan denk k weg
         menu.setVisible(true);
         main.update();
     }

@@ -1,44 +1,75 @@
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 /**
  * Responsible for the level selection panel.
  */
 public class LevelSelection extends JPanel {
+    private Settings settings;
+    private Controller controller;
+    private boolean[] completed;
+    private String[] times;
 
     /** Constructor for the LevelSelection class. */
-    public LevelSelection() {
+    public LevelSelection(Settings settings) {
+        this.settings = settings;
+        completed = settings.getCompleted();
+        times = settings.getTimes();
+        controller = settings.getController();
+
+        initializeUI();
+    }
+
+    private void initializeUI() {
         setLayout(new BorderLayout());
-        setBackground(Color.DARK_GRAY);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // === Center panel for level buttons ===
         JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(2, 5, 20, 150)); // More spacing between buttons
+        gridPanel.setLayout(new GridLayout(2, 5, 20, 50));
         gridPanel.setOpaque(false);
 
         for (int i = 1; i <= 10; i++) {
-            JButton btn = new JButton("Level " + i);
-            btn.setFont(new Font("Arial", Font.BOLD, 15));
+            JButton button = new JButton("Level " + i);
+            button.setFont(new Font("Arial", Font.BOLD, 15));
 
-            final int btnNumber = i;
-            btn.addActionListener(e -> btnPressed(btnNumber));            
-            gridPanel.add(btn);
+            final int level = i;
+            button.addActionListener(e -> btnPressed(level));
+
+            String status = "Not completed";
+            if (completed[i - 1]) {
+                status = "Best: " + times[i - 1];
+                button.setBackground(Color.GREEN);
+            }
+
+            JLabel infoLabel = new JLabel(status, SwingConstants.CENTER);
+            infoLabel.setForeground(Color.WHITE);
+            infoLabel.setFont(new Font("Arial", Font.ITALIC, 15));
+            infoLabel.setForeground(Color.BLACK);
+
+            JPanel levelPanel = new JPanel();
+            levelPanel.setLayout(new BorderLayout());
+            levelPanel.setOpaque(false);
+            levelPanel.add(button, BorderLayout.CENTER);
+            levelPanel.add(infoLabel, BorderLayout.SOUTH);
+
+            gridPanel.add(levelPanel);
         }
 
-        // === Bottom panel for navigation buttons ===
         JPanel navPanel = new JPanel();
         navPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 150));
         navPanel.setOpaque(false);
 
-        JButton backButton = new JButton("Back");
-        JButton nextButton = new JButton("Next Level");
+        JButton bckBtn = new JButton("Back");
+        JButton nxtBtn = new JButton("Next Level");
 
-        backButton.setFont(new Font("Arial", Font.BOLD, 15));
-        nextButton.setFont(new Font("Arial", Font.BOLD, 15));
+        bckBtn.setFont(new Font("Arial", Font.BOLD, 15));
+        nxtBtn.setFont(new Font("Arial", Font.BOLD, 15));
 
-        navPanel.add(backButton);
-        navPanel.add(nextButton);
+        bckBtn.addActionListener(e -> bckBtnPressed());
+        nxtBtn.addActionListener(e -> nxtBtnPressed());
+
+        navPanel.add(bckBtn);
+        navPanel.add(nxtBtn);
 
         add(gridPanel, BorderLayout.CENTER);
         add(navPanel, BorderLayout.SOUTH);
@@ -74,14 +105,12 @@ public class LevelSelection extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Level Selection Demo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(640, 640);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+    /** Hides level selection panel and displays menu. */
+    public void bckBtnPressed() {
+        controller.removePanel(this);
+        controller.addPanel(settings.getMenu());
+    }
 
-        frame.add(new LevelSelection());
-        frame.setVisible(true);
+    public void nxtBtnPressed() { //TODO
     }
 }

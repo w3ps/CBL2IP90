@@ -7,10 +7,12 @@ import javax.swing.*;
 public class Menu extends JPanel {
     private int tileSize;
     private JButton startBtn;
+    private JButton lvlBtn;
     private JButton settingsBtn;
     private JButton exitBtn;
     private Controller controller;
     private Settings settings;
+    private LevelSelection ls;
     private static final Dimension BTN_SIZE = new Dimension(180, 60);
 
     /**
@@ -23,8 +25,10 @@ public class Menu extends JPanel {
         tileSize = controller.getTileSize();
         settings = controller.getSettings();
         settings.setMenu(this);
+        ls = new LevelSelection(settings);
 
         startBtn = new JButton("Start Game");
+        lvlBtn = new JButton("Level Selection");
         settingsBtn = new JButton("Options");
         exitBtn = new JButton("Exit");
 
@@ -44,6 +48,10 @@ public class Menu extends JPanel {
         startBtn.setMaximumSize(BTN_SIZE);
         startBtn.addActionListener(e -> startBtnPressed());
 
+        lvlBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lvlBtn.setMaximumSize(BTN_SIZE);
+        lvlBtn.addActionListener(e -> lvlBtnPressed());
+
         settingsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         settingsBtn.setMaximumSize(BTN_SIZE);
         settingsBtn.addActionListener(e -> optionsBtnPressed());
@@ -54,6 +62,8 @@ public class Menu extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0, 30)));
         add(startBtn);
+        add(Box.createRigidArea(new Dimension(0, 30)));
+        add(lvlBtn);
         add(Box.createRigidArea(new Dimension(0, 30)));
         add(settingsBtn);
         add(Box.createRigidArea(new Dimension(0, 30)));
@@ -73,13 +83,21 @@ public class Menu extends JPanel {
     /**
      * Opens the options menu and hides the main menu.
      */
-    public void optionsBtnPressed() { // TODO
+    public void optionsBtnPressed() {
         controller.removePanel(this);
         controller.addPanel(settings);
     }
 
+    public void lvlBtnPressed() { //TODO
+        controller.removePanel(this);
+        controller.addPanel(ls);
+    }
+
+    /**
+     * Closes the application and saves the users data.
+     */
     public void exitBtnPressed() {
-        new Storage();
+        // new Storage(); TODO
         System.exit(0);
     }
 }
