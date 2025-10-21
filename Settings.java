@@ -14,6 +14,7 @@ public class Settings extends JPanel {
     private Controller controller;
     private Menu menu;
     private Storage storage;
+    private Music music;
 
     /**
      * Constructor for the SettingsPanel class.
@@ -22,6 +23,7 @@ public class Settings extends JPanel {
         level = 1;
         volume = 50;
         this.controller = controller;
+        music = new Music(this);
 
         initialize();
     }
@@ -72,12 +74,20 @@ public class Settings extends JPanel {
         add(backButton, gbc);
 
         levelSpinner.addChangeListener(e -> setLevel((int) levelSpinner.getValue()));
-        volumeSlider.addChangeListener(e -> volume = volumeSlider.getValue());
+        volumeSlider.addChangeListener(e -> updateVolume());
         backButton.addActionListener(e -> backButtonPressed());
     }
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    /**
+     * Updates the volume for both settings and music.
+     */
+    public void updateVolume() {
+        volume = volumeSlider.getValue();
+        music.setVolume(volume);
     }
 
     /**

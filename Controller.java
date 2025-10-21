@@ -18,9 +18,6 @@ public class Controller {
         this.main = main;
         tileSize = main.getTileSize();
         settings = new Settings(this);
-        storage = new Storage(settings);
-        storage.addVolume();
-
         menu = new Menu(this);
         addPanel(menu);
     }
