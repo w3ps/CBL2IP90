@@ -17,7 +17,7 @@ public class Settings extends JPanel {
     private Music music;
 
     /**
-     * Constructor for the SettingsPanel class.
+     * Constructor for the Settings class.
      */
     public Settings(Controller controller) {
         level = 1;

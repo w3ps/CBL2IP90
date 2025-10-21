@@ -21,12 +21,7 @@ public class Music {
     public Music(Settings settings) {
         this.settings = settings;
         volume = this.settings.getVolume();
-
-        try {
-            musicFile = new File(LOCATION);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        musicFile = new File(LOCATION);
 
         play();
     }
