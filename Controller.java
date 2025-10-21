@@ -9,7 +9,6 @@ public class Controller {
     private Main main;
     private Menu menu;
     private Settings settings;
-    private Storage storage;   
 
     /**
      * Creates and implements the control class.

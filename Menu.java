@@ -79,6 +79,7 @@ public class Menu extends JPanel {
     }
 
     public void exitBtnPressed() {
+        new Storage();
         System.exit(0);
     }
 }
