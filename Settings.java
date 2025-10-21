@@ -13,6 +13,7 @@ public class Settings extends JPanel {
     private JButton backButton;
     private Controller controller;
     private Menu menu;
+    private Storage storage;
 
     /**
      * Constructor for the SettingsPanel class.
@@ -78,9 +79,9 @@ public class Settings extends JPanel {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-    
+
     /**
-     * Removes settings panel and goes back to main menu. 
+     * Removes settings panel and goes back to main menu.
      */
     public void backButtonPressed() {
         controller.removePanel(this);
