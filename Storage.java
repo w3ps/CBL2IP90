@@ -6,24 +6,28 @@ import java.util.Scanner;
 
 public class Storage {
     private Settings settings;
-    int volume;
+    private int volume;
 
     public Storage(Settings settings) {
-        this.settings = settings;
+        this
+        run();
     }
 
-    public static void main(String[] args) {
+    public void run() {
         ArrayList<Integer> data = readData();
+        print(data);
 
-        data.add(volume);
+        data.remove(0);
+        data.add(updateVolume());
 
         writeData(data);
     }
 
+
     private static ArrayList<Integer> readData() {
-        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
         try {
-            Scanner fileIn = new Scanner(new File("data.txt"));
+            Scanner fileIn = new Scanner(new File("other\\data.txt"));
             while (fileIn.hasNext()) {
                 list.add(fileIn.nextInt());
             }
@@ -36,7 +40,7 @@ public class Storage {
 
     private static void writeData(ArrayList<Integer> list) {
         try {
-            PrintWriter fileOut = new PrintWriter("data.txt");
+            PrintWriter fileOut = new PrintWriter("other\\data.txt");
             for (Integer i : list) {
                 fileOut.println(i);
             }
@@ -46,8 +50,23 @@ public class Storage {
         }
     }
 
-    public void addVolume() {
+    private static void print(ArrayList<Integer> list) {
+        if (list.size() > 0) {
+            for (Integer i : list) {
+                System.out.println(i);
+            }
+        }
+        
+    }
+
+    public int updateVolume() {
         volume = settings.getVolume();
+        return volume;
+    }
+
+    public static void main(String[] args) {
+        new Storage();
     }
 
 }
+    

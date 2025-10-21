@@ -93,6 +93,7 @@ public class Settings extends JPanel {
     }
 
     public int getVolume() {
+        volume = 70;
         return volume;
     }
 }
