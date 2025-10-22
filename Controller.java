@@ -18,8 +18,9 @@ public class Controller {
     public Controller(Main main) {
         this.main = main;
         tileSize = main.getTileSize();
-        storage = new Storage();
+        storage = new Storage(this);
         music = new Music(storage.getVolume());
+        settings = new Settings(this);
         menu = new Menu(this);
         addPanel(menu);
     }
@@ -56,27 +57,23 @@ public class Controller {
         main.update();
     }
 
-    /**
-     * Hides the given panel p from the frame.
-     */
-    public void hidePanel(JPanel p) { // TODO kan denk k weg
-        p.setVisible(false);
-        main.update();
-    }
-
-    /**
-     * Shows the main menu and updates the frame.
-     */
-    public void showMenu() { // TODO kan denk k weg
-        menu.setVisible(true);
-        main.update();
-    }
-
     public int getTileSize() {
         return tileSize;
     }
 
     public Settings getSettings() {
         return settings;
+    }
+
+    public Menu getMenu() {
+        return this.menu;
+    }
+
+    public Music getMusic() {
+        return music;
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 }

@@ -55,7 +55,7 @@ public class Goal extends JPanel {
      * Shows main menu and hides the gamepanel.
      */
     public void mmButtonPressed() {
-        controller.showMenu();
+        controller.addPanel(controller.getMenu());;
         controller.removeLPane(gp);;
     }
 

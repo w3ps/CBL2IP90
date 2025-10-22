@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Stores the settings and handles the settings panel.
+ * Handles the settings panel.
  */
 public class Settings extends JPanel {
     private int volume;
@@ -16,9 +16,11 @@ public class Settings extends JPanel {
     /**
      * Constructor for the Settings class.
      */
-    public Settings(Controller controller, Storage storage) {
+    public Settings(Controller controller) {
         this.controller = controller;
-    
+        storage = controller.getStorage();
+        music = controller.getMusic();
+
         initializeUI();
     }
 
@@ -64,14 +66,11 @@ public class Settings extends JPanel {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
-
-    public Menu getMenu() {
-        return menu;
-    }
     
-    /** Updates the volume for both settings and music. */
+    /** Updates the volume for settings, storage and music. */
     public void updateVolume() {
         volume = volumeSlider.getValue();
+        storage.setVolume(volume);
         music.setVolume(volume);
     }
 

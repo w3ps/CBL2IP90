@@ -5,17 +5,17 @@ import javax.swing.*;
  * Responsible for the level selection panel.
  */
 public class LevelSelection extends JPanel {
-    private Settings settings;
+    private Storage storage;
     private Controller controller;
     private boolean[] completed;
     private String[] times;
 
     /** Constructor for the LevelSelection class. */
-    public LevelSelection(Settings settings) {
-        this.settings = settings;
-        completed = settings.getCompleted();
-        times = settings.getTimes();
-        controller = settings.getController();
+    public LevelSelection(Storage storage) {
+        this.storage = storage;
+        completed = this.storage.getCompleted();
+        times = this.storage.getTimes();
+        controller = this.storage.getController();
 
         initializeUI();
     }
@@ -108,9 +108,9 @@ public class LevelSelection extends JPanel {
     /** Hides level selection panel and displays menu. */
     public void bckBtnPressed() {
         controller.removePanel(this);
-        controller.addPanel(settings.getMenu());
+        controller.addPanel(controller.getMenu());
     }
 
-    public void nxtBtnPressed() { //TODO
+    public void nxtBtnPressed() { // TODO
     }
 }

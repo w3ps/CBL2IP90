@@ -12,6 +12,7 @@ public class Menu extends JPanel {
     private JButton exitBtn;
     private Controller controller;
     private Settings settings;
+    private Storage storage;
     private LevelSelection ls;
     private static final Dimension BTN_SIZE = new Dimension(180, 60);
 
@@ -22,10 +23,11 @@ public class Menu extends JPanel {
         setPreferredSize(new Dimension(640, 640));
 
         this.controller = controller;
+        storage = controller.getStorage();
         tileSize = controller.getTileSize();
         settings = controller.getSettings();
         settings.setMenu(this);
-        ls = new LevelSelection(settings);
+        ls = new LevelSelection(storage);
 
         startBtn = new JButton("Start Game");
         lvlBtn = new JButton("Level Selection");
@@ -39,7 +41,6 @@ public class Menu extends JPanel {
      * Initializes the Menu panel.
      */
     public void initialize() {
-        // setBackground(Color.DARK_GRAY);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(
                 30, 100, 30, 100));
@@ -54,7 +55,7 @@ public class Menu extends JPanel {
 
         settingsBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         settingsBtn.setMaximumSize(BTN_SIZE);
-        settingsBtn.addActionListener(e -> optionsBtnPressed());
+        settingsBtn.addActionListener(e -> sttngsBtnPressed());
 
         exitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         exitBtn.setMaximumSize(BTN_SIZE);
@@ -73,28 +74,28 @@ public class Menu extends JPanel {
     /**
      * Launches the game and hides the main menu.
      */
-    public void startBtnPressed() { // TODO
+    public void startBtnPressed() { // TODO: goeie level.
         GamePanel gp = new GamePanel(tileSize);
         gp.setController(controller);
         controller.addLPane(gp);
-        controller.hidePanel(this);
+        controller.removePanel(this);
     }
 
     /**
      * Opens the options menu and hides the main menu.
      */
-    public void optionsBtnPressed() {
+    public void sttngsBtnPressed() {
         controller.removePanel(this);
         controller.addPanel(settings);
     }
 
-    public void lvlBtnPressed() { //TODO
+    public void lvlBtnPressed() { // TODO
         controller.removePanel(this);
         controller.addPanel(ls);
     }
 
     /**
-     * Closes the application and saves the users data.
+     * Closes the application TODO: and saves the users data.
      */
     public void exitBtnPressed() {
         // new Storage(); TODO

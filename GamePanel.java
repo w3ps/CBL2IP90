@@ -20,7 +20,7 @@ public class GamePanel extends JLayeredPane {
         this.tileSize = tileSize;
         size = tileSize * 128;
 
-        maze = new Maze(this.tileSize, this.tileSize, "maze_templates\\0maze.txt");
+        maze = new Maze(this.tileSize, "maze_templates\\0maze.txt");
         maze.setGamePanel(this);
         mazePanel = maze.makePanel();
 

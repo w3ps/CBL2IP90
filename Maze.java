@@ -9,8 +9,7 @@ import javax.swing.*;
  */
 public class Maze {
 
-    private int xSize;
-    private int ySize;
+    private int tileSize;
     private Scanner source;
     private File file;
     private int[][] tiles; // Multidemensional array to display maze
@@ -21,9 +20,8 @@ public class Maze {
     /**
      * Constructor for the maze class.
      */
-    public Maze(int xSize, int ySize, String file) {
-        this.xSize = xSize;
-        this.ySize = ySize;
+    public Maze(int tileSize, String file) {
+        this.tileSize = tileSize;
         this.file = new File(file);
 
         try {
@@ -41,10 +39,10 @@ public class Maze {
      * Initializes grid from input by file.
      */
     private int[][] initialize() {
-        int[][] grid = new int[xSize][ySize];
+        int[][] grid = new int[tileSize][tileSize];
         while (source.hasNextInt()) {
-            for (int i = 0; i < xSize; i++) {
-                for (int j = 0; j < ySize; j++) {
+            for (int i = 0; i < tileSize; i++) {
+                for (int j = 0; j < tileSize; j++) {
                     grid[i][j] = source.nextInt();
                 }
             }
@@ -60,7 +58,7 @@ public class Maze {
      * Turns 'tiles' into a panel with a corresponding gridlayout.
      */
     public JPanel makePanel() {
-        mazePanel = new JPanel(new GridLayout(xSize, ySize));
+        mazePanel = new JPanel(new GridLayout(tileSize, tileSize));
         mazePanel.setBackground(Color.BLACK);
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
