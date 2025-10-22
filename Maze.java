@@ -72,8 +72,8 @@ public class Maze {
      * Checks if the given coordinates collide with a tile.
      */
     public boolean checkCollision(int x, int y) {
-        int tileX = x / 128;
-        int tileY = y / 128;
+        int tileX = x / 64;
+        int tileY = y / 64;
         int val;
         try {
             val = tiles[tileY][tileX];
@@ -82,7 +82,7 @@ public class Maze {
         }
         if (val == 0) {
             return false;
-        } else if (val == 7) { // TODO: 7 = Number of goal tile. Evt change in future.
+        } else if (val == 8) { // TODO: 8 = Number of goal tile. Evt change in future.
             gp.goalEvent();
             return true;
         }

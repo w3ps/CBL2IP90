@@ -16,7 +16,7 @@ public class TileIcons {
     /**
      * Constructor for the 'Tile' class.
      */
-    public TileIcons(int [][] tiles) {
+    public TileIcons(int[][] tiles) {
         this.tiles = tiles;
         images = new BufferedImage[PIC_AMOUNT];
         initialize();
@@ -39,11 +39,11 @@ public class TileIcons {
      * Returns the image corresponding to the tile, or null if the tile is 'air'.
      */
     public JPanel getTileIcon(int r, int c) {
-        int tileValue = tiles[r][c];
-        if (tileValue == 0) {
+        int tile = tiles[r][c];
+        if (tile == 0) {
             return new ScaledImagePanel(null);
         } else {
-            return new ScaledImagePanel(images[tileValue]);
+            return new ScaledImagePanel(images[tile - 1]);
         }
     }
 

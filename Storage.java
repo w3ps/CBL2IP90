@@ -79,16 +79,14 @@ public class Storage {
     public Controller getController() {
         return this.controller;
     }
-    
-    public void levelCompleted(int level) {
-        completed[level - 1] = true;
-    }
 
     public void setVolume(int volume) {
         this.volume = volume;
     }
-    
-    /** Returns the number of the first uncompleted level, or 1 if all are completed. */
+
+    /**
+     * Returns the number of the first uncompleted level, or 1 if all are completed.
+     */
     public int getNextLevel() {
         for (int i = 0; i < 10; i++) {
             if (completed[i]) {
@@ -97,5 +95,11 @@ public class Storage {
         }
         return 1;
     }
-    
+
+    /** Updates the completed levels and the times, for the storage. */
+    public void updateCompleted(int lvlIndex, String timeString) {
+        completed[lvlIndex] = true;
+        times[lvlIndex] = timeString;
+    }
+
 }

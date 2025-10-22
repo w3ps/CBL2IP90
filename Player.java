@@ -34,7 +34,7 @@ public class Player extends JPanel implements KeyListener, Movement {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        sprite = (new ImageIcon(this.getClass().getResource("textures\\Sprite.png"))).getImage();
+        sprite = (new ImageIcon(this.getClass().getResource("textures\\mario.png"))).getImage();
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(sprite, 0, 0, this);
@@ -69,10 +69,12 @@ public class Player extends JPanel implements KeyListener, Movement {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+    }
 
     /**
      * Moves the player right to the next wall.

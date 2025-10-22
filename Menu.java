@@ -74,9 +74,8 @@ public class Menu extends JPanel {
     /**
      * Launches the game and hides the main menu.
      */
-    public void startBtnPressed() { // TODO: goeie level.
-        GamePanel gp = new GamePanel(tileSize);
-        gp.setController(controller);
+    public void startBtnPressed() { // TODO: goede level.
+        GamePanel gp = new GamePanel(tileSize, controller);
         controller.addLPane(gp);
         controller.removePanel(this);
     }
@@ -89,6 +88,7 @@ public class Menu extends JPanel {
         controller.addPanel(settings);
     }
 
+    /** Displays the level selection and hides the menu. */
     public void lvlBtnPressed() { // TODO
         controller.removePanel(this);
         controller.addPanel(ls);
@@ -101,4 +101,9 @@ public class Menu extends JPanel {
         // new Storage(); TODO
         System.exit(0);
     }
+
+    public LevelSelection getLevelSelection() {
+        return ls;
+    }
+    
 }

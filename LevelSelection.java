@@ -9,6 +9,8 @@ public class LevelSelection extends JPanel {
     private Controller controller;
     private boolean[] completed;
     private String[] times;
+    private JButton[] buttons;
+    private JLabel[] infoLabels;
 
     /** Constructor for the LevelSelection class. */
     public LevelSelection(Storage storage) {
@@ -16,6 +18,8 @@ public class LevelSelection extends JPanel {
         completed = this.storage.getCompleted();
         times = this.storage.getTimes();
         controller = this.storage.getController();
+        buttons = new JButton[10];
+        infoLabels = new JLabel[10];
 
         initializeUI();
     }
@@ -28,23 +32,25 @@ public class LevelSelection extends JPanel {
         gridPanel.setLayout(new GridLayout(2, 5, 20, 50));
         gridPanel.setOpaque(false);
 
-        for (int i = 1; i <= 10; i++) {
-            JButton button = new JButton("Level " + i);
+        for (int i = 0; i < buttons.length; i++) {
+            JButton button = new JButton("Level " + (i + 1));
             button.setFont(new Font("Arial", Font.BOLD, 15));
 
-            final int level = i;
+            final int level = i + 1;
             button.addActionListener(e -> btnPressed(level));
 
             String status = "Not completed";
-            if (completed[i - 1]) {
-                status = "Best: " + times[i - 1];
+            if (completed[i]) {
+                status = "Best: " + times[i];
                 button.setBackground(Color.GREEN);
             }
 
             JLabel infoLabel = new JLabel(status, SwingConstants.CENTER);
-            infoLabel.setForeground(Color.WHITE);
             infoLabel.setFont(new Font("Arial", Font.ITALIC, 15));
             infoLabel.setForeground(Color.BLACK);
+
+            buttons[i] = button;
+            infoLabels[i] = infoLabel;
 
             JPanel levelPanel = new JPanel();
             levelPanel.setLayout(new BorderLayout());
@@ -111,6 +117,25 @@ public class LevelSelection extends JPanel {
         controller.addPanel(controller.getMenu());
     }
 
-    public void nxtBtnPressed() { // TODO
+    public void nxtBtnPressed() { // TODO implement
     }
+
+    /** Marks a level as completed for LevelSelection, as well as the storage. */
+    public void levelCompleted(int lvlIndex, double time) {
+        completed[lvlIndex] = true;
+
+        if (time < Double.valueOf(times[lvlIndex])) {
+            times[lvlIndex] = String.valueOf(time).replace(".", ":");
+        }
+
+        updateButtons(lvlIndex);
+        storage.updateCompleted(lvlIndex, times[lvlIndex]);
+    }
+
+    /** Marks a given level green, and updates the text beneath it. */
+    public void updateButtons(int lvlIndex) {
+        infoLabels[lvlIndex].setText("Best: " + times[lvlIndex]);
+        buttons[lvlIndex].setBackground(Color.GREEN);
+    }
+
 }

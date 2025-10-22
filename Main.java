@@ -8,7 +8,7 @@ import javax.swing.*;
  */
 public class Main extends JFrame {
     private static final int TILE_SIZE = 10; // Size of the maze, expressed in tiles.
-    private static final int SIZE = TILE_SIZE * 128; // Size, expressed in pixels.
+    private static final int SIZE = 640; // Size, expressed in pixels.
 
     /**
      * Constructor for the main class (mainly the JFrame).
