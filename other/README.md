@@ -5,6 +5,7 @@ To do:
 - timer per level
 - level selection screen (met buttons)
 - aantal moves per level
+- txt naar json (persistent storage)
 - backlog
 
 - evt: aantal sterren
