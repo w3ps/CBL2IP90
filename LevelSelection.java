@@ -122,10 +122,14 @@ public class LevelSelection extends JPanel {
 
     /** Marks a level as completed for LevelSelection, as well as the storage. */
     public void levelCompleted(int lvlIndex, double time) {
-        completed[lvlIndex] = true;
 
-        if (time < Double.valueOf(times[lvlIndex])) {
-            times[lvlIndex] = String.valueOf(time).replace(".", ":");
+        if (completed[lvlIndex]) { // If level has been completed, update lowest time
+            if (time < Double.valueOf(times[lvlIndex])) {
+                times[lvlIndex] = String.valueOf(time);
+            }
+        } else { // Display new time
+            completed[lvlIndex] = true;
+            times[lvlIndex] = String.valueOf(time);
         }
 
         updateButtons(lvlIndex);

@@ -31,7 +31,7 @@ public class Menu extends JPanel {
 
         startBtn = new JButton("Start Game");
         lvlBtn = new JButton("Level Selection");
-        settingsBtn = new JButton("Options");
+        settingsBtn = new JButton("Settings");
         exitBtn = new JButton("Exit");
 
         initialize();
@@ -81,7 +81,7 @@ public class Menu extends JPanel {
     }
 
     /**
-     * Opens the options menu and hides the main menu.
+     * Opens the settings menu and hides the main menu.
      */
     public void sttngsBtnPressed() {
         controller.removePanel(this);
@@ -105,5 +105,5 @@ public class Menu extends JPanel {
     public LevelSelection getLevelSelection() {
         return ls;
     }
-    
+
 }

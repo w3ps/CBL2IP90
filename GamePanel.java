@@ -10,6 +10,7 @@ public class GamePanel extends JLayeredPane {
     private int size; // TODO FINAL, 640
     private int tileSize = 10; // TODO REMOVE
     private double time; // Measures the time it takes to complete level
+    private Levels levels;
     private Maze maze;
     private Menu menu;
     private JPanel mazePanel;
@@ -57,7 +58,7 @@ public class GamePanel extends JLayeredPane {
      */
     public void goalEvent() {
         time = System.currentTimeMillis() - time;
-        ls.levelCompleted(0, time / 1000); // TODO parameter level
+        ls.levelCompleted(0, time / 1000d); // TODO parameter level
 
         remove(p);
         remove(mazePanel);

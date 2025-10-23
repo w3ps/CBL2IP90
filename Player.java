@@ -35,28 +35,27 @@ public class Player extends JPanel implements KeyListener, Movement {
 
     /**
      * Attempt to load an image from several likely locations.
-     * Tries classpath (with and without leading slash), resource stream, classloader,
+     * Tries classpath (with and without leading slash), resource stream,
+     * classloader,
      * then tries relative to working directory. Prints debug information to stderr.
      */
     private Image loadSprite(String resourcePath) {
         String userDir = System.getProperty("user.dir");
         String[] candidates = new String[] {
-            "/" + resourcePath.replace("\\", "/"),
-            resourcePath.replace("\\", "/"),
-            "/" + (new File(resourcePath)).getName(),
-            (new File(userDir, resourcePath)).getPath()
+                "/" + resourcePath.replace("\\", "/"),
+                resourcePath.replace("\\", "/"),
+                "/" + (new File(resourcePath)).getName(),
+                (new File(userDir, resourcePath)).getPath()
         };
 
-        // 1) Try getResource with various candidates
         for (String cand : candidates) {
             try {
                 URL url = this.getClass().getResource(cand);
                 if (url != null) {
-                    System.err.println("Loaded sprite via getResource: " + url);
                     return ImageIO.read(url);
                 }
-                // try classloader
-                URL url2 = Thread.currentThread().getContextClassLoader().getResource(cand.startsWith("/") ? cand.substring(1) : cand);
+                URL url2 = Thread.currentThread().getContextClassLoader().getResource(
+                        cand.startsWith("/") ? cand.substring(1) : cand);
                 if (url2 != null) {
                     System.err.println("Loaded sprite via classloader: " + url2);
                     return ImageIO.read(url2);
@@ -67,7 +66,7 @@ public class Player extends JPanel implements KeyListener, Movement {
         }
 
         // 2) Try resource stream
-        for (String cand : new String[] {"/" + resourcePath, resourcePath}) {
+        for (String cand : new String[] { "/" + resourcePath, resourcePath }) {
             try (java.io.InputStream is = this.getClass().getResourceAsStream(cand)) {
                 if (is != null) {
                     System.err.println("Loaded sprite via getResourceAsStream: " + cand);
@@ -85,18 +84,19 @@ public class Player extends JPanel implements KeyListener, Movement {
         for (File f : filesToTry) {
             try {
                 if (f.exists()) {
-                    System.err.println("Loaded sprite via file: " + f.getAbsolutePath());
                     return ImageIO.read(f);
                 } else {
                     System.err.println("File not found: " + f.getAbsolutePath());
                 }
             } catch (IOException ex) {
-                System.err.println("Error reading image file " + f.getAbsolutePath() + ": " + ex.getMessage());
+                System.err.println("Error reading image file "
+                        + f.getAbsolutePath() + ": " + ex.getMessage());
             }
         }
 
         // 4) Not found — print helpful diagnostics
-        System.err.println("Sprite not found. Working dir: " + userDir + ", checked candidates: " + java.util.Arrays.toString(candidates));
+        System.err.println("Sprite not found. Working dir: " + userDir + ", checked candidates: "
+                + java.util.Arrays.toString(candidates));
         return null;
     }
 
