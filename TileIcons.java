@@ -9,15 +9,13 @@ import javax.swing.JPanel;
  * Implementation for the tile icons used in the maze grid.
  */
 public class TileIcons {
-    private int[][] tiles;
     private BufferedImage[] images;
-    private static final int PIC_AMOUNT = 8;
+    private static final int PIC_AMOUNT = 3;
 
     /**
      * Constructor for the 'Tile' class.
      */
-    public TileIcons(int[][] tiles) {
-        this.tiles = tiles;
+    public TileIcons() {
         images = new BufferedImage[PIC_AMOUNT];
         initialize();
     }
@@ -34,16 +32,16 @@ public class TileIcons {
             }
         }
     }
-    
+
     /**
-     * Returns the image corresponding to the tile, or null if the tile is 'air'.
+     * Returns a scaled panel corresponding to the tile, or null if the tile is
+     * 'air'.
      */
-    public JPanel getTileIcon(int r, int c) {
-        int tile = tiles[r][c];
-        if (tile == 0) {
+    public JPanel getTileIcon(int tileVal) {
+        if (tileVal == 0) {
             return new ScaledImagePanel(null);
         } else {
-            return new ScaledImagePanel(images[tile - 1]);
+            return new ScaledImagePanel(images[tileVal - 1]);
         }
     }
 
@@ -53,6 +51,7 @@ public class TileIcons {
 
         public ScaledImagePanel(BufferedImage image) {
             this.image = image;
+            setOpaque(false);
         }
 
         @Override

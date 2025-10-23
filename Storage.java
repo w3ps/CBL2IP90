@@ -89,11 +89,11 @@ public class Storage {
      */
     public int getNextLevel() {
         for (int i = 0; i < 10; i++) {
-            if (completed[i]) {
-                return (i + 1);
+            if (!completed[i]) {
+                return i;
             }
         }
-        return 1;
+        return 0;
     }
 
     /** Updates the completed levels and the times, for the storage. */

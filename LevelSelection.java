@@ -117,13 +117,16 @@ public class LevelSelection extends JPanel {
         controller.addPanel(controller.getMenu());
     }
 
-    public void nxtBtnPressed() { // TODO implement
+    /** Starts the next level, and hides the level selection menu. */
+    public void nxtBtnPressed() {
+        controller.getMenu().playLevel(storage.getNextLevel());
+        controller.removePanel(this);
     }
 
     /** Marks a level as completed for LevelSelection, as well as the storage. */
     public void levelCompleted(int lvlIndex, double time) {
 
-        if (completed[lvlIndex]) { // If level has been completed, update lowest time
+        if (completed[lvlIndex]) { // If level completed before, update lowest time
             if (time < Double.valueOf(times[lvlIndex])) {
                 times[lvlIndex] = String.valueOf(time);
             }

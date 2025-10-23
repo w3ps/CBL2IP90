@@ -1,52 +1,44 @@
 import java.awt.Dimension;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
  * Handles the JPanels related to the game itself, to maintain smooth flow.
  */
 public class GamePanel extends JLayeredPane {
-    private int size; // TODO FINAL, 640
-    private int tileSize = 10; // TODO REMOVE
-    private double time; // Measures the time it takes to complete level
-    private Levels levels;
+    private int size;
+    private int tileSize;
+    private int lvlIndex;
+    private double time; // Time it takes to complete the level
     private Maze maze;
-    private Menu menu;
-    private JPanel mazePanel;
     private Player p;
     private Controller controller;
     private LevelSelection ls;
+    private Levels lvls;
 
     /**
      * Constructor for the GamePanel class.
      */
-    public GamePanel(int tileSize, Controller controller) {
+    public GamePanel(Controller controller, Menu menu) {
         this.controller = controller;
-        this.menu = controller.getMenu();
         this.ls = menu.getLevelSelection();
-        size = tileSize * 64; // TODO REMOVE
-
-        maze = new Maze(this.tileSize, "maze_templates\\level1.txt"); // TODO FIX
-        maze.setGamePanel(this);
-        mazePanel = maze.makePanel();
-
-        p = new Player(size, tileSize); // TODO FIX
-        p.setMaze(maze);
-
-        initialize();
+        lvls = new Levels();
     }
 
-    /**
-     * Initializes the GamePanel by creating the related objects and panels.
-     */
-    public void initialize() {
-        mazePanel.setBounds(0, 0, size, size);
+    /** Starts the the maze corresponding to the given level. */
+    public void play(int lvlIndex) {
+        this.lvlIndex = lvlIndex;
+        tileSize = lvls.getTileSizes()[this.lvlIndex];
+        size = tileSize * 64;
 
+        maze = new Maze(this.lvlIndex, lvls, this);
+        maze.setBounds(0, 0, size, size);
+
+        p = new Player(size, tileSize);
+        p.setMaze(maze);
         p.setFocusable(true);
         p.setBounds(0, 0, 64, 64);
 
-        add(mazePanel, Integer.valueOf(0));
+        add(maze, Integer.valueOf(0));
         add(p, Integer.valueOf(1));
         setPreferredSize(new Dimension(size, size));
 
@@ -58,10 +50,10 @@ public class GamePanel extends JLayeredPane {
      */
     public void goalEvent() {
         time = System.currentTimeMillis() - time;
-        ls.levelCompleted(0, time / 1000d); // TODO parameter level
+        ls.levelCompleted(lvlIndex, time / 1000d);
 
         remove(p);
-        remove(mazePanel);
+        remove(maze);
 
         Goal goal = new Goal(size);
         goal.setBounds(0, 0, size, size);

@@ -2,10 +2,9 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- * Class for the main menu of the game.
+ * Responsible for the main menu.
  */
 public class Menu extends JPanel {
-    private int tileSize;
     private JButton startBtn;
     private JButton lvlBtn;
     private JButton settingsBtn;
@@ -14,6 +13,7 @@ public class Menu extends JPanel {
     private Settings settings;
     private Storage storage;
     private LevelSelection ls;
+    private GamePanel gp;
     private static final Dimension BTN_SIZE = new Dimension(180, 60);
 
     /**
@@ -24,10 +24,10 @@ public class Menu extends JPanel {
 
         this.controller = controller;
         storage = controller.getStorage();
-        tileSize = controller.getTileSize();
         settings = controller.getSettings();
         settings.setMenu(this);
         ls = new LevelSelection(storage);
+        gp = new GamePanel(controller, this);
 
         startBtn = new JButton("Start Game");
         lvlBtn = new JButton("Level Selection");
@@ -71,13 +71,16 @@ public class Menu extends JPanel {
         add(exitBtn);
     }
 
-    /**
-     * Launches the game and hides the main menu.
-     */
-    public void startBtnPressed() { // TODO: goede level.
-        GamePanel gp = new GamePanel(tileSize, controller);
-        controller.addLPane(gp);
+    /** Starts the next level. */
+    public void startBtnPressed() {
+        playLevel(storage.getNextLevel());
         controller.removePanel(this);
+    }
+
+    /** Starts the level and hides the other menu. */
+    public void playLevel(int lvlIndex) {
+        gp.play(lvlIndex);
+        controller.addLPane(gp);
     }
 
     /**
@@ -89,7 +92,7 @@ public class Menu extends JPanel {
     }
 
     /** Displays the level selection and hides the menu. */
-    public void lvlBtnPressed() { // TODO
+    public void lvlBtnPressed() {
         controller.removePanel(this);
         controller.addPanel(ls);
     }

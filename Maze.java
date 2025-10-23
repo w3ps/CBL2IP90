@@ -1,90 +1,62 @@
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 import javax.swing.*;
 
 /**
  * Class for the structure and logic of the maze itself.
  */
-public class Maze {
+public class Maze extends JPanel {
 
     private int tileSize;
-    private Scanner source;
-    private File file;
-    private int[][] tiles; // Multidemensional array to display maze
+    private int[][] grid; // Multidemensional array to display maze
     private TileIcons tileIcons;
-    private JPanel mazePanel;
     private GamePanel gp;
+    private Levels lvls;
 
     /**
      * Constructor for the maze class.
      */
-    public Maze(int tileSize, String file) {
-        this.tileSize = tileSize;
-        this.file = new File(file);
-
-        try {
-            source = new Scanner(this.file);
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + this.file);
-            e.printStackTrace();
-        }
-
-        tiles = initialize();
-        tileIcons = new TileIcons(tiles);
-    }
-
-    /**
-     * Initializes grid from input by file.
-     */
-    private int[][] initialize() {
-        int[][] grid = new int[tileSize][tileSize];
-        while (source.hasNextInt()) {
-            for (int i = 0; i < tileSize; i++) {
-                for (int j = 0; j < tileSize; j++) {
-                    grid[i][j] = source.nextInt();
-                }
-            }
-        }
-        return grid;
-    }
-
-    public void setGamePanel(GamePanel gp) {
+    public Maze(int lvlIndex, Levels lvls, GamePanel gp) {
+        this.lvls = lvls;
         this.gp = gp;
+        tileSize = this.lvls.getTileSizes()[lvlIndex];
+        grid = this.lvls.getGrids().get(lvlIndex);
+        tileIcons = new TileIcons();
+
+        setLayout(new GridLayout(tileSize, tileSize));
+        initializeUI();
     }
 
-    /**
-     * Turns 'tiles' into a panel with a corresponding gridlayout.
-     */
-    public JPanel makePanel() {
-        mazePanel = new JPanel(new GridLayout(tileSize, tileSize));
-        mazePanel.setBackground(Color.BLACK);
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles.length; j++) {
-                mazePanel.add(tileIcons.getTileIcon(i, j));
+    /** Initializes the panel and grid for the maze. */
+    public void initializeUI() {
+        setBackground(Color.BLACK);
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                add(tileIcons.getTileIcon(grid[i][j]));
             }
         }
-        return mazePanel;
     }
 
     /**
      * Checks if the given coordinates collide with a tile.
      */
-    public boolean checkCollision(int x, int y) {
-        int tileX = x / 64;
-        int tileY = y / 64;
+    public boolean checkCollision(int x, int y, Player p) {
+        int c = x / 64;
+        int r = y / 64;
         int val;
+
         try {
-            val = tiles[tileY][tileX];
+            val = grid[r][c];
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             val = 1;
         }
+
         if (val == 0) {
             return false;
-        } else if (val == 8) { // TODO: 8 = Number of goal tile. Evt change in future.
+        } else if (val == 2) { // TODO: 8 = Number of goal tile. Evt change in future.
             gp.goalEvent();
             return true;
+        } else if (val == 3) {
+            p.restart();
         }
         return true;
     }
