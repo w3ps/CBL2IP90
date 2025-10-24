@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,7 @@ public class Levels {
 
     /** Constructor for the Levels class. */
     public Levels() {
-        TILE_SIZES = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0 };
+        TILE_SIZES = new int[] { 7, 10, 10, 10, 9, 10, 10, 10, 10, 10, 0 };
         SOURCE_FLS = new File[LVL_AMT + 1];
 
         for (int i = 0; i < LVL_AMT; i++) {
@@ -30,8 +31,9 @@ public class Levels {
         try {
             sc = new Scanner(SOURCE_FLS[i]);
         } catch (FileNotFoundException e) { // Only used for custom levels
-            JOptionPane.showMessageDialog(
-                    null, "File not found: " + SOURCE_FLS[i], "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "File not found: " + SOURCE_FLS[i]
+                    + "\nCheck custom_level.txt in directory maze_templates for instructions.",
+                    e.toString(), JOptionPane.ERROR_MESSAGE);
         }
 
         grid = new int[TILE_SIZES[i]][TILE_SIZES[i]];
@@ -47,9 +49,11 @@ public class Levels {
                     grid[j][k] = sc.nextInt();
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException e) { // Only used for custom levels
-            JOptionPane.showMessageDialog(null,
-                    "Given size and size of file do not match", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ArrayIndexOutOfBoundsException | NoSuchElementException e) {
+            // Only used for custom levels
+            JOptionPane.showMessageDialog(null, "Given size and size of file do not match"
+                    + "\nCheck custom_level.txt in directory maze_templates for instructions.",
+                    e.toString(), JOptionPane.ERROR_MESSAGE);
         }
 
     }

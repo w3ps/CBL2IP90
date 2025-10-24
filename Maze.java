@@ -52,7 +52,7 @@ public class Maze extends JPanel {
 
         if (val == 0) {
             return false;
-        } else if (val == 2) { // TODO: 8 = Number of goal tile. Evt change in future.
+        } else if (val == 2) {
             gp.goalEvent();
             return true;
         } else if (val == 3) {

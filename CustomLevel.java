@@ -4,7 +4,7 @@ import javax.swing.*;
 /** The panel for allowing the user to construct a custom level. */
 public class CustomLevel extends JPanel {
     private int tileSize = 10;
-    private String location = "maze_templates/level0.txt";
+    private String location = "maze_templates/custom_level.txt";
     private Levels lvls;
     private Controller controller;
     private Menu menu;
@@ -33,7 +33,7 @@ public class CustomLevel extends JPanel {
         JLabel sizeLabel = new JLabel("Size of axis, in tiles:");
         sizeLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
-        JSpinner sizeSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 16, 1));
+        JSpinner sizeSpinner = new JSpinner(new SpinnerNumberModel(tileSize, 1, 16, 1));
         sizeSpinner.setPreferredSize(new Dimension(300, 20));
         sizeSpinner.setFont(new Font("Arial", Font.PLAIN, 15));
         sizeSpinner.addChangeListener(e -> tileSize = (int) sizeSpinner.getValue());
@@ -49,7 +49,7 @@ public class CustomLevel extends JPanel {
         centerPanel.add(locationLabel, gbc);
 
         gbc.gridx = 1;
-        JTextField locationField = new JTextField("maze_templates/level0.txt");
+        JTextField locationField = new JTextField(location);
         locationField.setPreferredSize(new Dimension(300, 20));
         locationField.setFont(new Font("Arial", Font.PLAIN, 15));
         locationField.addActionListener(e -> location = locationField.getText());
@@ -57,7 +57,7 @@ public class CustomLevel extends JPanel {
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.setOpaque(false);
-        
+
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.BOLD, 15));
         backButton.addActionListener(e -> bckBtnPressed());
@@ -73,14 +73,16 @@ public class CustomLevel extends JPanel {
     }
 
     /** Displays the custom level, loaded from the users input. */
-    public void createBtnPressed() { // TODO: fix custom level marking as complete.
+    public void createBtnPressed() {
         lvls.addCustomLvl(tileSize, location);
         controller.removePanel(this);
         menu.playLevel(10);
         SwingUtilities.invokeLater(() -> menu.getGamePanel().getPlayer().requestFocusInWindow());
     }
-    
-    public void bckBtnPressed() { // TODO
-        
+
+    /** Returns to the main menu. */
+    public void bckBtnPressed() {
+        controller.removePanel(this);
+        controller.addPanel(menu);
     }
 }
