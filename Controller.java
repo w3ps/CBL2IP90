@@ -5,6 +5,7 @@ import javax.swing.JPanel;
  * Controls the main GUI.
  */
 public class Controller {
+    private GamePanel gp;
     private Main main;
     private Menu menu;
     private Music music;
@@ -22,6 +23,7 @@ public class Controller {
         music = new Music(storage.getVolume());
         settings = new Settings(this);
         menu = new Menu(this);
+        gp = new GamePanel(this, menu);
         addPanel(menu);
     }
 
@@ -87,5 +89,9 @@ public class Controller {
     
     public Storage getStorage() {
         return storage;
+    }
+
+    public int getCurrentLevel() {
+        return gp.getLevelIndex();
     }
 }

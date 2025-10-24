@@ -4,6 +4,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.*;
+import org.json.JSONArray;
+
 /** Stores and saves the users data. */
 public class Storage {
     private boolean[] completed;
@@ -17,21 +20,30 @@ public class Storage {
         completed = new boolean[10];
         volume = 0;
         times = new String[10];
-        
-        // run();
+
+        run();
     }
 
     public void run() { // TODO denk ik? Geen idee wat jij hier wil. Werkt trwns niet
-        ArrayList<Integer> data = read();
-        print(data);
-        data.remove(0);
-        write(data);
+        ArrayList<Data> array = new ArrayList<Data>();
+        array.add(new Data(0, 0, 0));
+
+        JSONArray jsonArray
+
+        
+        
+        
+        //ArrayList<Integer> data = read();
+        //print(data);
+        // data.remove(0);
+        //data.add(setVolume(volume));
+        //write(data);
     }
 
     private static ArrayList<Integer> read() {
         ArrayList<Integer> list = new ArrayList<Integer>();
         try {
-            Scanner fileIn = new Scanner(new File("other\\data.txt"));
+            Scanner fileIn = new Scanner(new File("other\\data.json"));
             while (fileIn.hasNext()) {
                 list.add(fileIn.nextInt());
             }
@@ -44,7 +56,7 @@ public class Storage {
 
     private static void write(ArrayList<Integer> list) {
         try {
-            PrintWriter fileOut = new PrintWriter("other\\data.txt");
+            PrintWriter fileOut = new PrintWriter("other\\data.json");
             for (Integer i : list) {
                 fileOut.println(i);
             }
@@ -102,4 +114,11 @@ public class Storage {
         times[lvlIndex] = timeString;
     }
 
+    public static void main(String[] args) {
+        // Quick test runner: constructs Storage with a null Controller (safe)
+        // The constructor calls run() which will read and print data from
+        // other\data.json
+        System.out.println("Running Storage test (no Controller provided)");
+        new Storage(null);
+    }
 }

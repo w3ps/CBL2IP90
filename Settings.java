@@ -74,6 +74,10 @@ public class Settings extends JPanel {
         music.setVolume(volume);
     }
 
+    public int getVolume() {
+        return volume;
+    }
+
     /**
      * Removes settings panel and goes back to main menu.
      */
