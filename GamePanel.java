@@ -21,7 +21,7 @@ public class GamePanel extends JLayeredPane {
     public GamePanel(Controller controller, Menu menu) {
         this.controller = controller;
         this.ls = menu.getLevelSelection();
-        lvls = new Levels();
+        lvls = controller.getLevels();
     }
 
     /** Starts the the maze corresponding to the given level. */

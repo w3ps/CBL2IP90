@@ -11,6 +11,7 @@ public class LevelSelection extends JPanel {
     private String[] times;
     private JButton[] buttons;
     private JLabel[] infoLabels;
+    private CustomLevel cl;
 
     /** Constructor for the LevelSelection class. */
     public LevelSelection(Storage storage) {
@@ -66,15 +67,19 @@ public class LevelSelection extends JPanel {
         navPanel.setOpaque(false);
 
         JButton bckBtn = new JButton("Back");
+        JButton cstmBtn = new JButton("Custom Level");
         JButton nxtBtn = new JButton("Next Level");
 
         bckBtn.setFont(new Font("Arial", Font.BOLD, 15));
+        cstmBtn.setFont(new Font("Arial", Font.BOLD, 15));
         nxtBtn.setFont(new Font("Arial", Font.BOLD, 15));
 
         bckBtn.addActionListener(e -> bckBtnPressed());
+        cstmBtn.addActionListener(e -> cstmBtnPressed());
         nxtBtn.addActionListener(e -> nxtBtnPressed());
 
         navPanel.add(bckBtn);
+        navPanel.add(cstmBtn);
         navPanel.add(nxtBtn);
 
         add(gridPanel, BorderLayout.CENTER);
@@ -95,6 +100,13 @@ public class LevelSelection extends JPanel {
         controller.addPanel(controller.getMenu());
     }
 
+    /** Displays the custom level creation panel, and hides the level selection panel. */
+    public void cstmBtnPressed() {
+        cl = new CustomLevel(controller, controller.getLevels());
+        controller.addPanel(cl);
+        controller.removePanel(this);
+    }
+    
     /** Starts the next level, and hides the level selection menu. */
     public void nxtBtnPressed() {
         controller.getMenu().startBtnPressed();

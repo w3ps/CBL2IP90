@@ -10,11 +10,13 @@ public class Controller {
     private Music music;
     private Settings settings;
     private Storage storage;
+    private Levels lvls;
 
     /**
      * Creates and implements the control class.
      */
     public Controller(Main main) {
+        lvls = new Levels();
         this.main = main;
         storage = new Storage(this);
         music = new Music(storage.getVolume());
@@ -79,6 +81,10 @@ public class Controller {
         return music;
     }
 
+    public Levels getLevels() {
+        return lvls;
+    }
+    
     public Storage getStorage() {
         return storage;
     }

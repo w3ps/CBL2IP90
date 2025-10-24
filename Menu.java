@@ -97,9 +97,7 @@ public class Menu extends JPanel {
         controller.addPanel(ls);
     }
 
-    /**
-     * Closes the application TODO: and saves the users data.
-     */
+    /** Closes the application TODO: and saves the users data. */
     public void exitBtnPressed() {
         // new Storage(); TODO
         System.exit(0);
@@ -107,6 +105,10 @@ public class Menu extends JPanel {
 
     public LevelSelection getLevelSelection() {
         return ls;
+    }
+
+    public GamePanel getGamePanel() {
+        return gp;
     }
 
 }

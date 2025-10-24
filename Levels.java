@@ -2,49 +2,63 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /** Responsible for storing the levels and its attributes. */
 public class Levels {
-    private static final int LVL_AMT = 10; // Amount of premade levels
+    private static final int LVL_AMT = 10; // Amount of playable levels
     private static int[] TILE_SIZES;
     private int[][] grid;
     private HashMap<Integer, int[][]> grids = new HashMap<>();
     private static File[] SOURCE_FLS;
-    private Scanner source;
+    private Scanner sc;
 
     /** Constructor for the Levels class. */
     public Levels() {
-        TILE_SIZES = new int[] {10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
-        SOURCE_FLS = new File[LVL_AMT];
+        TILE_SIZES = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0 };
+        SOURCE_FLS = new File[LVL_AMT + 1];
 
-        initialize();
+        for (int i = 0; i < LVL_AMT; i++) {
+            SOURCE_FLS[i] = new File("maze_templates\\level" + i + ".txt");
+            initialize(i);
+        }
     }
 
     /** Initializes the variables for Levels. */
-    public void initialize() {
-        for (int i = 0; i < LVL_AMT; i++) {
-            SOURCE_FLS[i] = new File("maze_templates\\level" + i + ".txt");
+    public void initialize(int i) {
 
-            try {
-                source = new Scanner(SOURCE_FLS[i]);
-            } catch (FileNotFoundException e) {
-                System.err.println("File not found: " + SOURCE_FLS[i]);
-                e.printStackTrace();
-            }
-
-            grid = new int[TILE_SIZES[i]][TILE_SIZES[i]];
-            initializeGrid();
-            grids.put(i, grid);
+        try {
+            sc = new Scanner(SOURCE_FLS[i]);
+        } catch (FileNotFoundException e) { // Only used for custom levels
+            JOptionPane.showMessageDialog(
+                    null, "File not found: " + SOURCE_FLS[i], "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        grid = new int[TILE_SIZES[i]][TILE_SIZES[i]];
+        initializeGrid();
+        grids.put(i, grid);
     }
 
     /** Initializes the grid for a specific level. */
     public void initializeGrid() {
-        for (int j = 0; j < grid.length; j++) {
-            for (int k = 0; k < grid.length; k++) {
-                grid[j][k] = source.nextInt();
+        try {
+            for (int j = 0; j < grid.length; j++) {
+                for (int k = 0; k < grid.length; k++) {
+                    grid[j][k] = sc.nextInt();
+                }
             }
+        } catch (ArrayIndexOutOfBoundsException e) { // Only used for custom levels
+            JOptionPane.showMessageDialog(null,
+                    "Given size and size of file do not match", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+    }
+
+    /** Adds the custom level to the array of levels. */
+    public void addCustomLvl(int tileSize, String location) {
+        TILE_SIZES[10] = tileSize;
+        SOURCE_FLS[10] = new File(location);
+        initialize(10);
     }
 
     public HashMap<Integer, int[][]> getGrids() {
