@@ -17,7 +17,7 @@ public class Storage {
         completed = new boolean[10];
         volume = 0;
         times = new String[10];
-
+        
         // run();
     }
 

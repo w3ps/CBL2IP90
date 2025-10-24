@@ -36,7 +36,7 @@ public class LevelSelection extends JPanel {
             JButton button = new JButton("Level " + (i + 1));
             button.setFont(new Font("Arial", Font.BOLD, 15));
 
-            final int level = i + 1;
+            final int level = i;
             button.addActionListener(e -> btnPressed(level));
 
             String status = "Not completed";
@@ -85,30 +85,8 @@ public class LevelSelection extends JPanel {
      * Maps the number of the button to that specific level.
      */
     public void btnPressed(int btnNumber) {
-        switch (btnNumber) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            default:
-                break;
-        }
+        controller.getMenu().playLevel(btnNumber);
+        controller.removePanel(this);
     }
 
     /** Hides level selection panel and displays menu. */
@@ -119,7 +97,7 @@ public class LevelSelection extends JPanel {
 
     /** Starts the next level, and hides the level selection menu. */
     public void nxtBtnPressed() {
-        controller.getMenu().playLevel(storage.getNextLevel());
+        controller.getMenu().startBtnPressed();
         controller.removePanel(this);
     }
 

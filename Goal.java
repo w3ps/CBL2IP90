@@ -12,12 +12,17 @@ public class Goal extends JPanel {
     private JButton nxtBtn; // Next Level button
     private GamePanel gp;
     private Controller controller;
+    private Menu menu;
 
     /**
      * Constructor for the Goal class.
      */
-    public Goal(int size) {
-        setPreferredSize(new Dimension(size, size));
+    public Goal(GamePanel gp, Controller controller) {
+        setPreferredSize(new Dimension(640, 640));
+
+        this.gp = gp;
+        this.controller = controller;
+        this.menu = controller.getMenu();
 
         textPanel = new JPanel();
         goalLabel = new JLabel("You won, good job!");
@@ -43,23 +48,18 @@ public class Goal extends JPanel {
         add(btnPanel, BorderLayout.SOUTH);
     }
 
-    public void setGamePanel(GamePanel gp) {
-        this.gp = gp;
-    }
-
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
-
-    /**
-     * Shows main menu and hides the gamepanel.
-     */
+    /** Shows main menu, removes the gamepanel and the goal menu. */
     public void mmButtonPressed() {
-        controller.removeLPane(gp);;
-        controller.addPanel(controller.getMenu());;
+        gp.remove(this);
+        controller.removeLPane(gp);
+        controller.addPanel(menu);
     }
 
+    /** Starts the next level and removes the goal panel. */
     public void nxtButtonPressed() {
-        // TODO
+        gp.remove(this);
+        controller.removeLPane(gp);
+        menu.startBtnPressed();
+        SwingUtilities.invokeLater(() -> gp.getPlayer().requestFocusInWindow());
     }
 }

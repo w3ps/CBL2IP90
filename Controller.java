@@ -5,7 +5,6 @@ import javax.swing.JPanel;
  * Controls the main GUI.
  */
 public class Controller {
-    private int tileSize;
     private Main main;
     private Menu menu;
     private Music music;
@@ -17,7 +16,6 @@ public class Controller {
      */
     public Controller(Main main) {
         this.main = main;
-        tileSize = main.getTileSize();
         storage = new Storage(this);
         music = new Music(storage.getVolume());
         settings = new Settings(this);
@@ -30,7 +28,7 @@ public class Controller {
      */
     public void addPanel(JPanel p) {
         main.add(p);
-        main.update();
+        update();
     }
 
     /**
@@ -38,7 +36,7 @@ public class Controller {
      */
     public void addLPane(JLayeredPane p) {
         main.add(p);
-        main.update();
+        update();
     }
 
     /**
@@ -46,7 +44,7 @@ public class Controller {
      */
     public void removePanel(JPanel p) {
         main.remove(p);
-        main.update();
+        update();
     }
 
     /**
@@ -54,11 +52,19 @@ public class Controller {
      */
     public void removeLPane(JLayeredPane p) {
         main.remove(p);
-        main.update();
+        update();
     }
 
-    public int getTileSize() {
-        return tileSize;
+    /**
+     * Updates the frame. Restores the frame to its original size if eiter of its
+     * dimensions is 0.
+     */
+    public void update() {
+        main.pack();
+
+        if (main.getWidth() == 136 || main.getHeight() == 39) { 
+            main.setSize(640, 640);
+        }
     }
 
     public Settings getSettings() {

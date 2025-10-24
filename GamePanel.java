@@ -55,10 +55,13 @@ public class GamePanel extends JLayeredPane {
         remove(p);
         remove(maze);
 
-        Goal goal = new Goal(size);
+        Goal goal = new Goal(this, controller);
         goal.setBounds(0, 0, size, size);
-        goal.setGamePanel(this);
-        goal.setController(controller);
         add(goal);
+    }
+
+    /** Returns the current player instance. */
+    public Player getPlayer() {
+        return p;
     }
 }

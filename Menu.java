@@ -71,13 +71,13 @@ public class Menu extends JPanel {
         add(exitBtn);
     }
 
-    /** Starts the next level. */
+    /** Starts the next level and hides the menu panel. */
     public void startBtnPressed() {
         playLevel(storage.getNextLevel());
         controller.removePanel(this);
     }
 
-    /** Starts the level and hides the other menu. */
+    /** Starts the level. */
     public void playLevel(int lvlIndex) {
         gp.play(lvlIndex);
         controller.addLPane(gp);
