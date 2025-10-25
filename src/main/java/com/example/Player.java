@@ -1,3 +1,5 @@
+package com.example;
+
 import java.awt.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,7 +30,7 @@ public class Player extends JPanel implements KeyListener, Movement {
 
         addKeyListener(this);
         setOpaque(false);
-        sprite = loadSprite("textures/mario.png");
+        sprite = loadSprite("/textures/mario.png");
     }
 
     /** Loads the sprite. */

@@ -1,3 +1,5 @@
+package com.example;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ public class Levels {
         SOURCE_FLS = new File[LVL_AMT + 1];
 
         for (int i = 0; i < LVL_AMT; i++) {
-            SOURCE_FLS[i] = new File("maze_templates\\level" + i + ".txt");
+            SOURCE_FLS[i] = new File("src\\main\\resources\\maze_templates\\level" + i + ".txt");
             initialize(i);
         }
     }

@@ -1,3 +1,5 @@
+package com.example;
+
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -9,7 +11,7 @@ import javax.sound.sampled.LineUnavailableException;
  * Music is responsible for the audio for Gravity Shift.
  */
 public class Music {
-    private static final String LOCATION = "other\\Sweden.wav";
+    private static final String LOCATION = "src\\main\\resources\\other\\Sweden.wav";
     private File musicFile;
     private int volume;
     private Clip clip;

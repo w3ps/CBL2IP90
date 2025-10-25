@@ -1,3 +1,5 @@
+package com.example;
+
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -19,7 +21,7 @@ public class Controller {
         lvls = new Levels();
         this.main = main;
         storage = new Storage(this);
-        music = new Music(storage.getVolume());
+        music = new Music(0); //TODO: goed verbinden.
         settings = new Settings(this);
         menu = new Menu(this);
         addPanel(menu);

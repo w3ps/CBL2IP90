@@ -1,31 +1,37 @@
+package com.example;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /** Stores and saves the users data. */
 public class Storage {
     private boolean[] completed;
     private String[] times; // Fastest time in which the player completed a level
-    private int volume;
     private Controller controller;
+    private int volume;
 
     /** Constructor for the Storage class. */
     public Storage(Controller controller) {
         this.controller = controller;
         completed = new boolean[10];
-        volume = 0;
         times = new String[10];
-        
+
         // run();
     }
 
     public void run() { // TODO denk ik? Geen idee wat jij hier wil. Werkt trwns niet
-        ArrayList<Integer> data = read();
-        print(data);
-        data.remove(0);
-        write(data);
+        JSONArray data = new JSONArray();
+        JSONObject obj = new JSONObject();
+        obj.put("volume", 10);
+        data.put(obj);
+        System.out.print(obj);
     }
 
     private static ArrayList<Integer> read() {
@@ -70,10 +76,6 @@ public class Storage {
 
     public String[] getTimes() {
         return times;
-    }
-
-    public int getVolume() {
-        return volume;
     }
 
     public Controller getController() {

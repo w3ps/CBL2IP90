@@ -1,10 +1,12 @@
+package com.example;
+
 import java.awt.*;
 import javax.swing.*;
 
 /** The panel for allowing the user to construct a custom level. */
 public class CustomLevel extends JPanel {
     private int tileSize = 10;
-    private String location = "maze_templates/custom_level.txt";
+    private String location = "src/main/resources/maze_templates/custom_level.txt";
     private Levels lvls;
     private Controller controller;
     private Menu menu;

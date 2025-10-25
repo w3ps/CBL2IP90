@@ -1,3 +1,5 @@
+package com.example;
+
 import java.awt.Dimension;
 import javax.swing.JLayeredPane;
 

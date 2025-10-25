@@ -1,3 +1,5 @@
+package com.example;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -26,7 +28,8 @@ public class TileIcons {
     public void initialize() {
         for (int i = 0; i < images.length; i++) {
             try {
-                images[i] = ImageIO.read(new File("textures\\tiles\\" + (i + 1) + ".png"));
+                File tile = new File("src\\main\\resources\\textures\\tiles\\" + (i + 1) + ".png");
+                images[i] = ImageIO.read(tile);
             } catch (Exception e) {
                 e.printStackTrace();
             }

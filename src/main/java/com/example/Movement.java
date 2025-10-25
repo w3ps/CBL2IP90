@@ -1,3 +1,5 @@
+package com.example;
+
 /** 
  * Interface for the movement for the playable characted,
  * as well as the enemy.
