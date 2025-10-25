@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -103,5 +102,4 @@ public class Storage {
         completed[lvlIndex] = true;
         times[lvlIndex] = timeString;
     }
-
 }

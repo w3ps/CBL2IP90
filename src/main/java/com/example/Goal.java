@@ -20,15 +20,14 @@ public class Goal extends JPanel {
      * Constructor for the Goal class.
      */
     public Goal(GamePanel gp, Controller controller) {
-        setPreferredSize(new Dimension(640, 640));
-
         this.gp = gp;
         this.controller = controller;
         this.menu = controller.getMenu();
 
         textPanel = new JPanel();
-        goalLabel = new JLabel("You won, good job!");
-        btnPanel = new JPanel(new GridLayout(1, 2));
+        btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 150));
+        goalLabel = new JLabel("You won, good job!", SwingConstants.CENTER);
+
         mmBtn = new JButton("Main Menu");
         nxtBtn = new JButton("Next Level");
 
@@ -39,14 +38,22 @@ public class Goal extends JPanel {
      * Initializes the Goal menu.
      */
     public void initialize() {
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(640, 640));
+
+        goalLabel.setFont(new Font("Arial", Font.BOLD, 30));
         textPanel.add(goalLabel);
+
         mmBtn.addActionListener(e -> mmButtonPressed());
         nxtBtn.addActionListener(e -> nxtButtonPressed());
 
-        btnPanel.add(mmBtn, BorderLayout.WEST);
-        btnPanel.add(nxtBtn, BorderLayout.EAST);
+        mmBtn.setPreferredSize(new Dimension(150, 75));
+        nxtBtn.setPreferredSize(new Dimension(150, 75));
 
-        add(textPanel, BorderLayout.NORTH);
+        btnPanel.add(mmBtn);
+        btnPanel.add(nxtBtn);
+
+        add(textPanel, BorderLayout.CENTER);
         add(btnPanel, BorderLayout.SOUTH);
     }
 

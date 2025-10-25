@@ -18,11 +18,11 @@ public class Levels {
 
     /** Constructor for the Levels class. */
     public Levels() {
-        TILE_SIZES = new int[] { 7, 10, 10, 10, 9, 10, 10, 10, 10, 10, 0 };
+        TILE_SIZES = new int[] { 7, 10, 10, 10, 10, 10, 15, 14, 15, 16, 0 };
         SOURCE_FLS = new File[LVL_AMT + 1];
 
         for (int i = 0; i < LVL_AMT; i++) {
-            SOURCE_FLS[i] = new File("src\\main\\resources\\maze_templates\\level" + i + ".txt");
+            SOURCE_FLS[i] = new File("src/main/resources/maze_templates/level" + i + ".txt");
             initialize(i);
         }
     }
