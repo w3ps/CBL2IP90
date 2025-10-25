@@ -64,8 +64,4 @@ public class GamePanel extends JLayeredPane {
     public Player getPlayer() {
         return p;
     }
-
-    public int getLevelIndex() {
-        return this.lvlIndex;
-    }
 }
