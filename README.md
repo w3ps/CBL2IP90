@@ -23,7 +23,7 @@ For instructions about formatting your maze, consult: 'src\main\resources\maze_t
 
 ## Running the game:
 ### Option 1. Run the .jar file (no external files needed):
-In this directory (*/CBL2IP90), run the following in any terminal: 
+Open any terminal in this directory (*/CBL2IP90) and run the following: 
 ```
 java -jar target/GravityShift.jar
 ```

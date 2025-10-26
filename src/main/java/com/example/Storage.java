@@ -150,8 +150,4 @@ public class Storage {
         }
         return 0;
     }
-
-    public static void main(String[] args) {
-        new Storage(new Controller(new Main()));
-    }
 }

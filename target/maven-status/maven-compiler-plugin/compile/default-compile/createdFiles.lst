@@ -13,5 +13,4 @@ com\example\LevelSelection.class
 com\example\Maze.class
 com\example\Goal.class
 com\example\Levels.class
-com\example\Data.class
 com\example\Storage.class
