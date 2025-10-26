@@ -117,19 +117,22 @@ public class LevelSelection extends JPanel {
 
     /** Marks a level as completed for LevelSelection, as well as the storage. */
     public void levelCompleted(int lvlIndex, double time) {
+        times = storage.getTimes();
         if (lvlIndex == 10) { // Custom level
             return;
         } else if (completed[lvlIndex]) { // If level completed before, update lowest time
             if (time < Double.valueOf(times[lvlIndex])) {
                 times[lvlIndex] = String.valueOf(time);
+                storage.setLevelTime(lvlIndex + 1, times[lvlIndex]);
             }
         } else { // Display new time
             completed[lvlIndex] = true;
+            storage.setLevelCompletion(lvlIndex + 1, completed[lvlIndex]);
             times[lvlIndex] = String.valueOf(time);
+            storage.setLevelTime(lvlIndex + 1, times[lvlIndex]);
         }
 
         updateButtons(lvlIndex);
-        storage.updateCompleted(lvlIndex, times[lvlIndex]);
     }
 
     /** Marks a given level green, and updates the text beneath it. */

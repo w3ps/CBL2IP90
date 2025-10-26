@@ -99,9 +99,8 @@ public class Menu extends JPanel {
         controller.addPanel(ls);
     }
 
-    /** Closes the application TODO: and saves the users data. */
+    /** Closes the application. */
     public void exitBtnPressed() {
-        // new Storage(); TODO
         System.exit(0);
     }
 

@@ -25,6 +25,7 @@ public class Controller {
         settings = new Settings(this);
         menu = new Menu(this);
         addPanel(menu);
+        readStorage();
     }
 
     /**
@@ -69,6 +70,12 @@ public class Controller {
         if (main.getWidth() == 136 || main.getHeight() == 39) { 
             main.setSize(640, 640);
         }
+    }
+
+    /** Reads the saved data and gives variable the right values when running the game. */
+    public void readStorage() {
+        settings.setVolume(storage.getVolume());
+        
     }
 
     public Settings getSettings() {

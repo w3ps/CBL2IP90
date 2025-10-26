@@ -1,4 +1,43 @@
 {
-    "volume": 0,
-    "level": 1
+    "volume": 91,
+    "level5": {
+        "completed": true,
+        "time": "8.358"
+    },
+    "level4": {
+        "completed": true,
+        "time": "49.062"
+    },
+    "level7": {
+        "completed": true,
+        "time": "114.409"
+    },
+    "level6": {
+        "completed": true,
+        "time": "10.665"
+    },
+    "level9": {
+        "completed": true,
+        "time": "22.106"
+    },
+    "level8": {
+        "completed": true,
+        "time": "56.222"
+    },
+    "level10": {
+        "completed": true,
+        "time": "159.473"
+    },
+    "level1": {
+        "completed": true,
+        "time": "1.575"
+    },
+    "level3": {
+        "completed": true,
+        "time": "8.987"
+    },
+    "level2": {
+        "completed": true,
+        "time": "6.16"
+    }
 }
